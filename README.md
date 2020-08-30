@@ -12,4 +12,4 @@ This repository is dedicated for automation of flows in Dell EMC RecoverPoint fo
 - See the help page of each script (i.e protectvm.py -h)
 - RecoverPoint for VMs REST API - online documentation - [Dell Technologies API Explorer](https://developer.dellemc.com)
 - RecoverPoint for VMs REST API - self-documentation (Swagger UI) - https://{plugin-server}/ui
-- RecoverPoint for VMs Postman Collection - [Postman Collection](RP4VMs_New RESTful_API.postman_collection.json)
+- RecoverPoint for VMs Postman Collection  (complementary to the openapi.json) - [Postman Collection](RP4VMs_New_RESTful_API.postman_collection.json)
