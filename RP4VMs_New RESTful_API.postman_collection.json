@@ -1,0 +1,5500 @@
+{
+	"info": {
+		"_postman_id": "a2cf2541-1230-4446-ab13-57d01e7f44db",
+		"name": "RP4VMs New RESTful API",
+		"description": "#RecoverPoint for VMs New RESTful API (RP4VMs 5.3 and later) - API v1#\r\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get RP4VMs Clusters",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/rp-clusters",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"rp-clusters"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get RP4VMs Clusters",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/rp-clusters",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rp-clusters"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 22 Jul 2020 10:15:42 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "292"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"address\": \"10.0.214.52\",\n        \"connectionStatus\": \"OK\",\n        \"id\": \"12560a07b180d47\",\n        \"isRegistered\": true,\n        \"name\": \"Venice\",\n        \"rpSystemId\": \"8070222104833501331\",\n        \"version\": \"5.3(m.444)\"\n    },\n    {\n        \"id\": \"433dff4829580b89\",\n        \"isRegistered\": false,\n        \"name\": \"Tokyo\",\n        \"rpSystemId\": \"8070222104833501331\",\n        \"version\": \"5.3(m.444)\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get RP4VMs Clusters - Registered",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/rp-clusters?isRegistered=true",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"rp-clusters"
+					],
+					"query": [
+						{
+							"key": "isRegistered",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get RP4VMs Clusters - Registered",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/rp-clusters?isRegistered=true",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rp-clusters"
+							],
+							"query": [
+								{
+									"key": "isRegistered",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 22 Jul 2020 10:17:02 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "172"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"address\": \"10.0.214.52\",\n        \"connectionStatus\": \"OK\",\n        \"id\": \"12560a07b180d47\",\n        \"isRegistered\": true,\n        \"name\": \"Venice\",\n        \"rpSystemId\": \"8070222104833501331\",\n        \"version\": \"5.3(m.444)\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get RP4VMs Systems",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/rp-systems",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"rp-systems"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get RP4VMs Systems",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/rp-systems",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rp-systems"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 12:08:44 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "107"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"connectionStatus\": \"OK\",\n        \"id\": \"8070222104833501331\",\n        \"rpClusters\": [\n            \"12560a07b180d47\",\n            \"433dff4829580b89\"\n        ]\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Protected VMs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/vms",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"vms"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Protected VMs",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/vms",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vms"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 22 Jul 2020 11:06:32 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7487"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"copyId\": \"1430434321_3c0aa16b4f1633b9_0\",\n        \"esxClusterId\": \"697bcf66-144d-4cae-930d-6364f96350ac_c52\",\n        \"esxClusterName\": \"Venice_HA1\",\n        \"groupId\": \"1430434321\",\n        \"groupName\": \"cg_RHEL7_DB1\",\n        \"guestOsType\": \"LINUX\",\n        \"id\": \"697bcf66-144d-4cae-930d-6364f96350ac_500dde64-8025-058c-de43-2fbb8e738605\",\n        \"localMacAddressReplication\": false,\n        \"name\": \"RHEL7_DB1\",\n        \"protectFutureNewVmdks\": true,\n        \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\",\n        \"replicateVmHardware\": true,\n        \"role\": \"PRODUCTION\",\n        \"rpClusterId\": \"3c0aa16b4f1633b9\",\n        \"rpClusterName\": \"Venice\",\n        \"status\": \"ACTIVE\",\n        \"vcId\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\n        \"vcName\": \"IdanK_vCenter2.lab.dell.com\",\n        \"vmFolderInInventory\": \"Venice/vm/RHEL7_DB1\",\n        \"vmReplicationId\": \"4abc924455d6761b\",\n        \"vmdks\": [\n            {\n                \"included\": true,\n                \"name\": \"Hard disk 1\",\n                \"path\": \"SCSI (0:0)\",\n                \"sizeInMB\": 1024\n            }\n        ]\n    },\n    {\n        \"copyId\": \"1430434321_3957e2611f4b4399_0\",\n        \"esxClusterId\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_c7\",\n        \"esxClusterName\": \"Tokyo_HA1\",\n        \"groupId\": \"1430434321\",\n        \"groupName\": \"cg_RHEL7_DB1\",\n        \"guestOsType\": \"LINUX\",\n        \"id\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_50c4e62c-8ca9-64a5-b39a-b65dc566dba2\",\n        \"localMacAddressReplication\": false,\n        \"name\": \"rp.RHEL7_DB1.copy.1.shadow\",\n        \"protectFutureNewVmdks\": true,\n        \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\",\n        \"replicateVmHardware\": true,\n        \"role\": \"REPLICA\",\n        \"rpClusterId\": \"3957e2611f4b4399\",\n        \"rpClusterName\": \"Tokyo\",\n        \"status\": \"ACTIVE\",\n        \"vcId\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed\",\n        \"vcName\": \"IdanK_vCenter.lab.dell.com\",\n        \"vmFolderInInventory\": \"Tokyo/vm/rp.RHEL7_DB1.copy.1.shadow\",\n        \"vmReplicationId\": \"4abc924455d6761b\",\n        \"vmdks\": [\n            {\n                \"included\": true,\n                \"name\": \"Hard disk 1\",\n                \"path\": \"SCSI (0:0)\",\n                \"sizeInMB\": 1024\n            }\n        ]\n    },\n    {\n        \"copyId\": \"313025718_3c0aa16b4f1633b9_0\",\n        \"esxClusterId\": \"697bcf66-144d-4cae-930d-6364f96350ac_c52\",\n        \"esxClusterName\": \"Venice_HA1\",\n        \"groupId\": \"313025718\",\n        \"groupName\": \"cg_Win2k12_PRD01\",\n        \"guestOsType\": \"WINDOWS\",\n        \"id\": \"697bcf66-144d-4cae-930d-6364f96350ac_500db489-a0eb-9f8b-f228-447b7afff8eb\",\n        \"localMacAddressReplication\": false,\n        \"name\": \"Win2k12_PRD01\",\n        \"protectFutureNewVmdks\": true,\n        \"replicaVmdkDiskProvisioningType\": \"THIN\",\n        \"replicateVmHardware\": true,\n        \"role\": \"PRODUCTION\",\n        \"rpClusterId\": \"3c0aa16b4f1633b9\",\n        \"rpClusterName\": \"Venice\",\n        \"status\": \"ACTIVE\",\n        \"vcId\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\n        \"vcName\": \"IdanK_vCenter2.lab.dell.com\",\n        \"vmFolderInInventory\": \"Venice/vm/Win2k12_PRD01\",\n        \"vmReplicationId\": \"46b89f7f7d3d172e\",\n        \"vmdks\": [\n            {\n                \"included\": true,\n                \"name\": \"Hard disk 7\",\n                \"path\": \"SCSI (0:4)\",\n                \"sizeInMB\": 10240\n            },\n            {\n                \"included\": true,\n                \"name\": \"Hard disk 6\",\n                \"path\": \"SCSI (0:3)\",\n                \"sizeInMB\": 40960\n            },\n            {\n                \"included\": false,\n                \"name\": \"Hard disk 5\",\n                \"path\": \"SCSI (0:2)\",\n                \"sizeInMB\": 2048\n            },\n            {\n                \"included\": true,\n                \"name\": \"Hard disk 1\",\n                \"path\": \"SCSI (0:0)\",\n                \"sizeInMB\": 30720\n            },\n            {\n                \"included\": false,\n                \"name\": \"Hard disk 4\",\n                \"path\": \"SCSI (2:0)\",\n                \"sizeInMB\": 1024\n            },\n            {\n                \"included\": true,\n                \"name\": \"Hard disk 3\",\n                \"path\": \"SCSI (1:0)\",\n                \"sizeInMB\": 1024\n            },\n            {\n                \"included\": false,\n                \"name\": \"Hard disk 2\",\n                \"path\": \"SCSI (0:1)\",\n                \"sizeInMB\": 10240\n            }\n        ]\n    },\n    {\n        \"copyId\": \"1590698639_3c0aa16b4f1633b9_0\",\n        \"esxClusterId\": \"697bcf66-144d-4cae-930d-6364f96350ac_c52\",\n        \"esxClusterName\": \"Venice_HA1\",\n        \"groupId\": \"1590698639\",\n        \"groupName\": \"cg_2-vms\",\n        \"guestOsType\": \"WINDOWS\",\n        \"id\": \"697bcf66-144d-4cae-930d-6364f96350ac_500d1946-6af1-bd06-5dab-834c5e04580a\",\n        \"localMacAddressReplication\": false,\n        \"name\": \"Win2k8_PRD\",\n        \"protectFutureNewVmdks\": true,\n        \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\",\n        \"replicateVmHardware\": true,\n        \"role\": \"PRODUCTION\",\n        \"rpClusterId\": \"3c0aa16b4f1633b9\",\n        \"rpClusterName\": \"Venice\",\n        \"status\": \"ACTIVE\",\n        \"vcId\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\n        \"vcName\": \"IdanK_vCenter2.lab.dell.com\",\n        \"vmFolderInInventory\": \"Venice/vm/Win2k8_PRD\",\n        \"vmReplicationId\": \"aa2491f555237834\",\n        \"vmdks\": [\n            {\n                \"included\": true,\n                \"name\": \"Hard disk 1\",\n                \"path\": \"SCSI (0:0)\",\n                \"sizeInMB\": 1024\n            }\n        ]\n    },\n    {\n        \"copyId\": \"1590698639_3c0aa16b4f1633b9_0\",\n        \"esxClusterId\": \"697bcf66-144d-4cae-930d-6364f96350ac_c52\",\n        \"esxClusterName\": \"Venice_HA1\",\n        \"groupId\": \"1590698639\",\n        \"groupName\": \"cg_2-vms\",\n        \"guestOsType\": \"WINDOWS\",\n        \"id\": \"697bcf66-144d-4cae-930d-6364f96350ac_50166721-a07b-8a06-4e12-90e9701f278c\",\n        \"localMacAddressReplication\": false,\n        \"name\": \"Win2k16_PRD05\",\n        \"protectFutureNewVmdks\": true,\n        \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\",\n        \"replicateVmHardware\": true,\n        \"role\": \"PRODUCTION\",\n        \"rpClusterId\": \"3c0aa16b4f1633b9\",\n        \"rpClusterName\": \"Venice\",\n        \"status\": \"ACTIVE\",\n        \"vcId\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\n        \"vcName\": \"IdanK_vCenter2.lab.dell.com\",\n        \"vmFolderInInventory\": \"Venice/vm/Win2k16_PRD05\",\n        \"vmReplicationId\": \"9a807d7c4b767e91\",\n        \"vmToolsVersion\": \"10246\",\n        \"vmdks\": [\n            {\n                \"included\": true,\n                \"name\": \"Hard disk 2\",\n                \"path\": \"SCSI (0:1)\",\n                \"sizeInMB\": 10240\n            },\n            {\n                \"included\": true,\n                \"name\": \"Hard disk 1\",\n                \"path\": \"SCSI (0:0)\",\n                \"sizeInMB\": 20480\n            }\n        ]\n    },\n    {\n        \"copyId\": \"313025718_3957e2611f4b4399_0\",\n        \"esxClusterId\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_c7\",\n        \"esxClusterName\": \"Tokyo_HA1\",\n        \"groupId\": \"313025718\",\n        \"groupName\": \"cg_Win2k12_PRD01\",\n        \"guestOsType\": \"WINDOWS\",\n        \"id\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_31951b33-1846-fa8d-fc61-2cdc81241213\",\n        \"localMacAddressReplication\": false,\n        \"name\": \"rp.Win2k12_PRD01.copy.shadow\",\n        \"protectFutureNewVmdks\": true,\n        \"replicaVmdkDiskProvisioningType\": \"THIN\",\n        \"replicateVmHardware\": true,\n        \"role\": \"REPLICA\",\n        \"rpClusterId\": \"3957e2611f4b4399\",\n        \"rpClusterName\": \"Tokyo\",\n        \"status\": \"ACTIVE\",\n        \"vcId\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed\",\n        \"vcName\": \"IdanK_vCenter.lab.dell.com\",\n        \"vmFolderInInventory\": \"Tokyo/vm/rp.Win2k12_PRD01.copy.shadow\",\n        \"vmReplicationId\": \"46b89f7f7d3d172e\",\n        \"vmdks\": [\n            {\n                \"included\": true,\n                \"name\": \"Hard disk 7\",\n                \"path\": \"SCSI (0:4)\",\n                \"sizeInMB\": 10240\n            },\n            {\n                \"included\": true,\n                \"name\": \"Hard disk 6\",\n                \"path\": \"SCSI (0:3)\",\n                \"sizeInMB\": 40960\n            },\n            {\n                \"included\": false,\n                \"name\": \"Hard disk 5\",\n                \"path\": \"SCSI (0:2)\",\n                \"sizeInMB\": 2048\n            },\n            {\n                \"included\": true,\n                \"name\": \"Hard disk 3\",\n                \"path\": \"SCSI (0:0)\",\n                \"sizeInMB\": 30720\n            },\n            {\n                \"included\": false,\n                \"name\": \"Hard disk 4\",\n                \"path\": \"SCSI (0:1)\",\n                \"sizeInMB\": 10240\n            },\n            {\n                \"included\": false,\n                \"name\": \"Hard disk 1\",\n                \"path\": \"SCSI (2:0)\",\n                \"sizeInMB\": 1024\n            },\n            {\n                \"included\": true,\n                \"name\": \"Hard disk 2\",\n                \"path\": \"SCSI (1:0)\",\n                \"sizeInMB\": 1024\n            }\n        ]\n    },\n    {\n        \"copyId\": \"1590698639_3957e2611f4b4399_0\",\n        \"esxClusterId\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_c7\",\n        \"esxClusterName\": \"Tokyo_HA1\",\n        \"groupId\": \"1590698639\",\n        \"groupName\": \"cg_2-vms\",\n        \"guestOsType\": \"WINDOWS\",\n        \"id\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_6d2af1da-0796-3fec-2e26-68c09b174acd\",\n        \"localMacAddressReplication\": false,\n        \"name\": \"rp.Win2k8_PRD.copy.shadow\",\n        \"protectFutureNewVmdks\": true,\n        \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\",\n        \"replicateVmHardware\": true,\n        \"role\": \"REPLICA\",\n        \"rpClusterId\": \"3957e2611f4b4399\",\n        \"rpClusterName\": \"Tokyo\",\n        \"status\": \"ACTIVE\",\n        \"vcId\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed\",\n        \"vcName\": \"IdanK_vCenter.lab.dell.com\",\n        \"vmFolderInInventory\": \"Tokyo/vm/rp.Win2k8_PRD.copy.shadow\",\n        \"vmReplicationId\": \"aa2491f555237834\",\n        \"vmdks\": [\n            {\n                \"included\": true,\n                \"name\": \"Hard disk 1\",\n                \"path\": \"SCSI (0:0)\",\n                \"sizeInMB\": 1024\n            }\n        ]\n    },\n    {\n        \"copyId\": \"1590698639_3957e2611f4b4399_0\",\n        \"esxClusterId\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_c7\",\n        \"esxClusterName\": \"Tokyo_HA1\",\n        \"groupId\": \"1590698639\",\n        \"groupName\": \"cg_2-vms\",\n        \"guestOsType\": \"WINDOWS\",\n        \"id\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_fc2bfc08-49ba-5439-7508-e2647194238b\",\n        \"localMacAddressReplication\": false,\n        \"name\": \"rp.Win2k16_PRD05.copy.shadow\",\n        \"protectFutureNewVmdks\": true,\n        \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\",\n        \"replicateVmHardware\": true,\n        \"role\": \"REPLICA\",\n        \"rpClusterId\": \"3957e2611f4b4399\",\n        \"rpClusterName\": \"Tokyo\",\n        \"status\": \"ACTIVE\",\n        \"vcId\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed\",\n        \"vcName\": \"IdanK_vCenter.lab.dell.com\",\n        \"vmFolderInInventory\": \"Tokyo/vm/rp.Win2k16_PRD05.copy.shadow\",\n        \"vmReplicationId\": \"9a807d7c4b767e91\",\n        \"vmdks\": [\n            {\n                \"included\": true,\n                \"name\": \"Hard disk 2\",\n                \"path\": \"SCSI (0:1)\",\n                \"sizeInMB\": 10240\n            },\n            {\n                \"included\": true,\n                \"name\": \"Hard disk 1\",\n                \"path\": \"SCSI (0:0)\",\n                \"sizeInMB\": 20480\n            }\n        ]\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Protected VMs - PROD",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/vms?role=PRODUCTION&fields=name,esxClusterName,rpClusterName,status",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"vms"
+					],
+					"query": [
+						{
+							"key": "role",
+							"value": "PRODUCTION"
+						},
+						{
+							"key": "fields",
+							"value": "name,esxClusterName,rpClusterName,status"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Protected VMs Copy",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/vms?role=PRODUCTION&fields=name,esxClusterName,rpClusterName,status",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vms"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "PRODUCTION"
+								},
+								{
+									"key": "fields",
+									"value": "name,esxClusterName,rpClusterName,status"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 22 Jul 2020 11:11:30 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "387"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"esxClusterName\": \"Venice_HA1\",\n        \"name\": \"RHEL7_DB1\",\n        \"rpClusterName\": \"Venice\",\n        \"status\": \"ACTIVE\"\n    },\n    {\n        \"esxClusterName\": \"Venice_HA1\",\n        \"name\": \"Win2k12_PRD01\",\n        \"rpClusterName\": \"Venice\",\n        \"status\": \"ACTIVE\"\n    },\n    {\n        \"esxClusterName\": \"Venice_HA1\",\n        \"name\": \"Win2k8_PRD\",\n        \"rpClusterName\": \"Venice\",\n        \"status\": \"ACTIVE\"\n    },\n    {\n        \"esxClusterName\": \"Venice_HA1\",\n        \"name\": \"Win2k16_PRD05\",\n        \"rpClusterName\": \"Venice\",\n        \"status\": \"ACTIVE\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Protected VMs - Replica",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/vms?role=REPLICA&fields=name,esxClusterName,rpClusterName,status,vcName",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"vms"
+					],
+					"query": [
+						{
+							"key": "role",
+							"value": "REPLICA"
+						},
+						{
+							"key": "fields",
+							"value": "name,esxClusterName,rpClusterName,status,vcName"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Protected VMs - PROD Copy",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/vms?role=REPLICA&fields=name,esxClusterName,rpClusterName,status,vcName",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vms"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "REPLICA"
+								},
+								{
+									"key": "fields",
+									"value": "name,esxClusterName,rpClusterName,status,vcName"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Wed, 22 Jul 2020 11:13:30 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "569"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"esxClusterName\": \"Tokyo_HA1\",\n        \"name\": \"rp.RHEL7_DB1.copy.1.shadow\",\n        \"rpClusterName\": \"Tokyo\",\n        \"status\": \"ACTIVE\",\n        \"vcName\": \"IdanK_vCenter.lab.dell.com\"\n    },\n    {\n        \"esxClusterName\": \"Tokyo_HA1\",\n        \"name\": \"rp.Win2k12_PRD01.copy.shadow\",\n        \"rpClusterName\": \"Tokyo\",\n        \"status\": \"ACTIVE\",\n        \"vcName\": \"IdanK_vCenter.lab.dell.com\"\n    },\n    {\n        \"esxClusterName\": \"Tokyo_HA1\",\n        \"name\": \"rp.Win2k8_PRD.copy.shadow\",\n        \"rpClusterName\": \"Tokyo\",\n        \"status\": \"ACTIVE\",\n        \"vcName\": \"IdanK_vCenter.lab.dell.com\"\n    },\n    {\n        \"esxClusterName\": \"Tokyo_HA1\",\n        \"name\": \"rp.Win2k16_PRD05.copy.shadow\",\n        \"rpClusterName\": \"Tokyo\",\n        \"status\": \"ACTIVE\",\n        \"vcName\": \"IdanK_vCenter.lab.dell.com\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Consistency Groups",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/rp-clusters?isRegistered=true",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"rp-clusters"
+					],
+					"query": [
+						{
+							"key": "isRegistered",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Consistency Groups",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 23 Jul 2020 15:58:02 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2005"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"bandwidthPriority\": 2,\n        \"copyIds\": [\n            \"1590698639_3957e2611f4b4399_0\",\n            \"1590698639_3c0aa16b4f1633b9_0\"\n        ],\n        \"enabled\": true,\n        \"id\": \"1590698639\",\n        \"name\": \"cg_2-vms\",\n        \"preferredRPA\": 2,\n        \"prodCopyId\": \"1590698639_3c0aa16b4f1633b9_0\",\n        \"prodRpClusterId\": \"3c0aa16b4f1633b9\",\n        \"prodRpClusterName\": \"Venice\",\n        \"prodVcId\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\n        \"prodVcName\": \"IdanK_vCenter2.lab.dell.com\",\n        \"protectionSizeInMB\": 31744,\n        \"startupSequence\": 3,\n        \"status\": \"ENABLED\",\n        \"transferEnabled\": true,\n        \"transferStatus\": \"ACTIVE\",\n        \"vmsStartupSequence\": {\n            \"9a807d7c4b767e91\": {\n                \"critical\": true,\n                \"preStartupStep\": {\n                    \"prompt\": {\n                        \"id\": \"3185008073752861942\",\n                        \"message\": \"Win DB Server is up\",\n                        \"name\": \"Call App Team\",\n                        \"timeoutInSeconds\": 180\n                    }\n                },\n                \"priority\": 1,\n                \"vmReplicationId\": \"9a807d7c4b767e91\"\n            },\n            \"aa2491f555237834\": {\n                \"critical\": true,\n                \"priority\": 3,\n                \"vmReplicationId\": \"aa2491f555237834\"\n            }\n        }\n    },\n    {\n        \"bandwidthPriority\": 2,\n        \"copyIds\": [\n            \"313025718_3957e2611f4b4399_0\",\n            \"313025718_3c0aa16b4f1633b9_0\"\n        ],\n        \"enabled\": true,\n        \"id\": \"313025718\",\n        \"name\": \"cg_Win2k12_PRD01\",\n        \"preferredRPA\": 1,\n        \"prodCopyId\": \"313025718_3c0aa16b4f1633b9_0\",\n        \"prodRpClusterId\": \"3c0aa16b4f1633b9\",\n        \"prodRpClusterName\": \"Venice\",\n        \"prodVcId\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\n        \"prodVcName\": \"IdanK_vCenter2.lab.dell.com\",\n        \"protectionSizeInMB\": 82944,\n        \"startupSequence\": 3,\n        \"status\": \"ENABLED\",\n        \"transferEnabled\": true,\n        \"transferStatus\": \"ACTIVE\",\n        \"vmsStartupSequence\": {\n            \"46b89f7f7d3d172e\": {\n                \"critical\": true,\n                \"priority\": 3,\n                \"vmReplicationId\": \"46b89f7f7d3d172e\"\n            }\n        }\n    },\n    {\n        \"bandwidthPriority\": 2,\n        \"copyIds\": [\n            \"1430434321_3957e2611f4b4399_0\",\n            \"1430434321_3c0aa16b4f1633b9_0\"\n        ],\n        \"enabled\": false,\n        \"id\": \"1430434321\",\n        \"name\": \"cg_RHEL7_DB1\",\n        \"preferredRPA\": 2,\n        \"prodCopyId\": \"1430434321_3c0aa16b4f1633b9_0\",\n        \"prodRpClusterId\": \"3c0aa16b4f1633b9\",\n        \"prodRpClusterName\": \"Venice\",\n        \"prodVcId\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\n        \"prodVcName\": \"IdanK_vCenter2.lab.dell.com\",\n        \"protectionSizeInMB\": 1024,\n        \"startupSequence\": 3,\n        \"status\": \"DISABLED\",\n        \"transferEnabled\": true,\n        \"transferStatus\": \"DISABLED\",\n        \"vmsStartupSequence\": {\n            \"4abc924455d6761b\": {\n                \"critical\": true,\n                \"priority\": 3,\n                \"vmReplicationId\": \"4abc924455d6761b\"\n            }\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Consistency Groups - Enabled",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/rp-clusters?isRegistered=true",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"rp-clusters"
+					],
+					"query": [
+						{
+							"key": "isRegistered",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Consistency Groups - Enabled",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups?enabled=true",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups"
+							],
+							"query": [
+								{
+									"key": "enabled",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 23 Jul 2020 15:57:43 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1432"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"bandwidthPriority\": 2,\n        \"copyIds\": [\n            \"1590698639_3957e2611f4b4399_0\",\n            \"1590698639_3c0aa16b4f1633b9_0\"\n        ],\n        \"enabled\": true,\n        \"id\": \"1590698639\",\n        \"name\": \"cg_2-vms\",\n        \"preferredRPA\": 2,\n        \"prodCopyId\": \"1590698639_3c0aa16b4f1633b9_0\",\n        \"prodRpClusterId\": \"3c0aa16b4f1633b9\",\n        \"prodRpClusterName\": \"Venice\",\n        \"prodVcId\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\n        \"prodVcName\": \"IdanK_vCenter2.lab.dell.com\",\n        \"protectionSizeInMB\": 31744,\n        \"startupSequence\": 3,\n        \"status\": \"ENABLED\",\n        \"transferEnabled\": true,\n        \"transferStatus\": \"ACTIVE\",\n        \"vmsStartupSequence\": {\n            \"9a807d7c4b767e91\": {\n                \"critical\": true,\n                \"preStartupStep\": {\n                    \"prompt\": {\n                        \"id\": \"3185008073752861942\",\n                        \"message\": \"Win DB Server is up\",\n                        \"name\": \"Call App Team\",\n                        \"timeoutInSeconds\": 180\n                    }\n                },\n                \"priority\": 1,\n                \"vmReplicationId\": \"9a807d7c4b767e91\"\n            },\n            \"aa2491f555237834\": {\n                \"critical\": true,\n                \"priority\": 3,\n                \"vmReplicationId\": \"aa2491f555237834\"\n            }\n        }\n    },\n    {\n        \"bandwidthPriority\": 2,\n        \"copyIds\": [\n            \"313025718_3957e2611f4b4399_0\",\n            \"313025718_3c0aa16b4f1633b9_0\"\n        ],\n        \"enabled\": true,\n        \"id\": \"313025718\",\n        \"name\": \"cg_Win2k12_PRD01\",\n        \"preferredRPA\": 1,\n        \"prodCopyId\": \"313025718_3c0aa16b4f1633b9_0\",\n        \"prodRpClusterId\": \"3c0aa16b4f1633b9\",\n        \"prodRpClusterName\": \"Venice\",\n        \"prodVcId\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\n        \"prodVcName\": \"IdanK_vCenter2.lab.dell.com\",\n        \"protectionSizeInMB\": 82944,\n        \"startupSequence\": 3,\n        \"status\": \"ENABLED\",\n        \"transferEnabled\": true,\n        \"transferStatus\": \"ACTIVE\",\n        \"vmsStartupSequence\": {\n            \"46b89f7f7d3d172e\": {\n                \"critical\": true,\n                \"priority\": 3,\n                \"vmReplicationId\": \"46b89f7f7d3d172e\"\n            }\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Consistency Group Copies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"groups",
+						":groupRep",
+						"copies"
+					],
+					"variable": [
+						{
+							"key": "groupRep",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Consistency Group Copies",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep",
+								"copies"
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win2k12_PRD01"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 16:00:17 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1273"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"1758284640_12560a07b180d47_0\",\n        \"vcId\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\n        \"vcName\": \"IdanK_vCenter2.lab.dell.com\",\n        \"groupId\": \"1758284640\",\n        \"rpClusterId\": \"12560a07b180d47\",\n        \"rpClusterName\": \"Venice\",\n        \"copyRole\": \"PRODUCTION\",\n        \"status\": \"OK\",\n        \"transferInfo\": {\n            \"status\": \"INITIALIZING\"\n        },\n        \"enabled\": true,\n        \"retentionEventsEnabled\": false,\n        \"snapshotConsolidation\": {\n            \"snapshotsConsolidationEnabled\": false,\n            \"noSnapConsolidationPeriodInSeconds\": 172800,\n            \"snapPerDayPeriodIndefinitely\": false,\n            \"snapPerDayPeriodInDays\": 5,\n            \"snapPerWeekPeriodIndefinitely\": false,\n            \"snapPerWeekPeriodInWeeks\": 4\n        }\n    },\n    {\n        \"id\": \"1758284640_433dff4829580b89_0\",\n        \"vcId\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed\",\n        \"vcName\": \"IdanK_vCenter.lab.dell.com\",\n        \"groupId\": \"1758284640\",\n        \"rpClusterId\": \"433dff4829580b89\",\n        \"rpClusterName\": \"Tokyo\",\n        \"copyRole\": \"REMOTE_REPLICA\",\n        \"status\": \"OK\",\n        \"transferInfo\": {\n            \"status\": \"INITIALIZING\",\n            \"progress\": 87\n        },\n        \"enabled\": true,\n        \"transferEnabled\": true,\n        \"retentionEventsEnabled\": false,\n        \"snapshotConsolidation\": {\n            \"snapshotsConsolidationEnabled\": false,\n            \"noSnapConsolidationPeriodInSeconds\": 172800,\n            \"snapPerDayPeriodIndefinitely\": false,\n            \"snapPerDayPeriodInDays\": 5,\n            \"snapPerWeekPeriodIndefinitely\": false,\n            \"snapPerWeekPeriodInWeeks\": 4\n        },\n        \"syncReplication\": false,\n        \"dynamicSyncMode\": \"OFF\",\n        \"rpoInSeconds\": 25,\n        \"wanCompression\": true,\n        \"deduplication\": false\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Candidate VMs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/vms/protect/candidates?vms=<string>",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"vms",
+						"protect",
+						"candidates"
+					],
+					"query": [
+						{
+							"key": "vms",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Candidate VMs",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/vms/protect/candidates?vms=Win2k12_PRD01",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vms",
+								"protect",
+								"candidates"
+							],
+							"query": [
+								{
+									"key": "vms",
+									"value": "Win2k12_PRD01"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Aug 2020 13:20:37 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "787"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"esxClusterId\": \"697bcf66-144d-4cae-930d-6364f96350ac_c52\",\n        \"esxClusterName\": \"Venice_HA1\",\n        \"id\": \"697bcf66-144d-4cae-930d-6364f96350ac_500db489-a0eb-9f8b-f228-447b7afff8eb\",\n        \"isValid\": true,\n        \"name\": \"Win2k12_PRD01\",\n        \"rpClusterId\": \"12560a07b180d47\",\n        \"rpClusterName\": \"Venice\",\n        \"vcId\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\n        \"vcName\": \"IdanK_vCenter2.lab.dell.com\",\n        \"vmdks\": [\n            {\n                \"name\": \"Hard disk 4\",\n                \"path\": \"SCSI (2:0)\",\n                \"sizeInMB\": 1024\n            },\n            {\n                \"name\": \"Hard disk 1\",\n                \"path\": \"SCSI (0:0)\",\n                \"sizeInMB\": 30720\n            },\n            {\n                \"name\": \"Hard disk 2\",\n                \"path\": \"SCSI (0:1)\",\n                \"sizeInMB\": 10240\n            },\n            {\n                \"name\": \"Hard disk 6\",\n                \"path\": \"SCSI (0:3)\",\n                \"sizeInMB\": 40960\n            },\n            {\n                \"name\": \"Hard disk 5\",\n                \"path\": \"SCSI (0:2)\",\n                \"sizeInMB\": 2048\n            },\n            {\n                \"name\": \"Hard disk 3\",\n                \"path\": \"SCSI (1:0)\",\n                \"sizeInMB\": 1024\n            },\n            {\n                \"name\": \"Hard disk 7\",\n                \"path\": \"SCSI (0:4)\",\n                \"sizeInMB\": 10240\n            }\n        ]\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Protection Defaults",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vm\": \"<string>\",\r\n    \"rpCluster\": \"<string>\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/vms/protect/defaults",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"vms",
+						"protect",
+						"defaults"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Protection Defaults",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vm\": \"Win2k12_PRD01\",\r\n    \"rpCluster\": \"Venice\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/vms/protect/defaults",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vms",
+								"protect",
+								"defaults"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Aug 2020 13:44:34 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "958"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"groupConfiguration\": {\n        \"copies\": [\n            {\n                \"journalDatastore\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_232\",\n                \"journalSizeInMB\": 10240,\n                \"replicaVmConfiguration\": {\n                    \"computeResource\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_domain_c7\"\n                },\n                \"rpCluster\": \"433dff4829580b89\",\n                \"rpoInSeconds\": 25,\n                \"syncReplication\": false,\n                \"vc\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed\",\n                \"vmDatastore\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_232\",\n                \"vmEsxCluster\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_c7\"\n            }\n        ],\n        \"name\": \"cg_Win2k12_PRD01\",\n        \"productionJournalDatastore\": \"697bcf66-144d-4cae-930d-6364f96350ac_547\",\n        \"productionJournalSizeInMB\": 3072\n    },\n    \"localMacAddressReplication\": false,\n    \"protectedVmdks\": [\n        \"SCSI (2:0)\",\n        \"SCSI (0:0)\",\n        \"SCSI (0:1)\",\n        \"SCSI (0:3)\",\n        \"SCSI (0:2)\",\n        \"SCSI (1:0)\",\n        \"SCSI (0:4)\"\n    ],\n    \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\",\n    \"replicateVmHardware\": true,\n    \"rpCluster\": \"12560a07b180d47\",\n    \"vc\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\n    \"vm\": \"697bcf66-144d-4cae-930d-6364f96350ac_500db489-a0eb-9f8b-f228-447b7afff8eb\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Protect VM",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"groupConfiguration\": {\r\n        \"copies\": [\r\n            {\r\n                \"journalDatastore\": \"<string>\",\r\n                \"journalSizeInMB\": \"<long>\",\r\n                \"replicaVmConfiguration\": {\r\n                    \"computeResource\": \"<string>\",\r\n                    \"existingReplicaVm\": \"<string>\"\r\n                },\r\n                \"rpCluster\": \"<string>\",\r\n                \"rpoInSeconds\": \"<long>\",\r\n                \"syncReplication\": \"false\",\r\n                \"vc\": \"<string>\",\r\n                \"vmDatastore\": \"<string>\",\r\n                \"vmEsxCluster\": \"<string>\"\r\n            },\r\n            {\r\n                \"journalDatastore\": \"<string>\",\r\n                \"journalSizeInMB\": \"<long>\",\r\n                \"replicaVmConfiguration\": {\r\n                    \"computeResource\": \"<string>\",\r\n                    \"existingReplicaVm\": \"<string>\"\r\n                },\r\n                \"rpCluster\": \"<string>\",\r\n                \"rpoInSeconds\": \"<long>\",\r\n                \"syncReplication\": \"false\",\r\n                \"vc\": \"<string>\",\r\n                \"vmDatastore\": \"<string>\",\r\n                \"vmEsxCluster\": \"<string>\"\r\n            }\r\n        ],\r\n        \"name\": \"<string>\",\r\n        \"productionJournalDatastore\": \"<string>\",\r\n        \"productionJournalSizeInMB\": \"<long>\"\r\n    },\r\n    \"localMacAddressReplication\": \"<boolean>\",\r\n    \"protectFutureNewVmdks\": \"<boolean>\",\r\n    \"protectedVmdks\": [\r\n        \"<string>\",\r\n        \"<string>\"\r\n    ],\r\n    \"replicaVmdkDiskProvisioningType\": \"<string>\",\r\n    \"replicateVmHardware\": \"<boolean>\",\r\n    \"rpCluster\": \"<string>\",\r\n    \"vc\": \"<string>\",\r\n    \"vm\": \"<string>\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/vms/protect",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"vms",
+						"protect"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Protect VM",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"groupConfiguration\": {\r\n        \"copies\": [\r\n            {\r\n                \"journalDatastore\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_232\",\r\n                \"journalSizeInMB\": 10240,\r\n                \"replicaVmConfiguration\": {\r\n                    \"computeResource\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_domain_c7\"\r\n                },\r\n                \"rpCluster\": \"433dff4829580b89\",\r\n                \"rpoInSeconds\": 25,\r\n                \"syncReplication\": false,\r\n                \"vc\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed\",\r\n                \"vmDatastore\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_232\",\r\n                \"vmEsxCluster\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_c7\"\r\n            }\r\n        ],\r\n        \"name\": \"cg_Win2k12_PRD01\",\r\n        \"productionJournalDatastore\": \"697bcf66-144d-4cae-930d-6364f96350ac_547\",\r\n        \"productionJournalSizeInMB\": 3072\r\n    },\r\n    \"localMacAddressReplication\": false,\r\n    \"protectedVmdks\": [\r\n        \"SCSI (2:0)\",\r\n        \"SCSI (0:0)\",\r\n        \"SCSI (0:1)\",\r\n        \"SCSI (0:3)\",\r\n        \"SCSI (0:2)\",\r\n        \"SCSI (1:0)\",\r\n        \"SCSI (0:4)\"\r\n    ],\r\n    \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\",\r\n    \"replicateVmHardware\": true,\r\n    \"rpCluster\": \"12560a07b180d47\",\r\n    \"vc\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\r\n    \"vm\": \"697bcf66-144d-4cae-930d-6364f96350ac_500db489-a0eb-9f8b-f228-447b7afff8eb\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/vms/protect",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vms",
+								"protect"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Aug 2020 13:47:34 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"b87ff54b-2e00-4415-b26c-a4af4747833d\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Protection Defaults - Multi-VM to Single Group",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vms\": [\r\n        {\r\n            \"vm\": \"<string>\"\r\n        },\r\n        {\r\n            \"vm\": \"<string>\"\r\n        }\r\n    ],\r\n    \"rpCluster\": \"<string>\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/rp-systems/:rp-system-id/vms/protect-to-single-group/defaults",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"rp-systems",
+						":rp-system-id",
+						"vms",
+						"protect-to-single-group",
+						"defaults"
+					],
+					"variable": [
+						{
+							"key": "rp-system-id",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Protection Defaults - Multi-VM",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vms\": [\r\n        {\r\n            \"vm\": \"Win2k19-VBS\"\r\n        },\r\n        {\r\n            \"vm\": \"Win2k16_PRDAPP01\"\r\n        }\r\n    ],\r\n    \"rpCluster\": \"Tokyo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/rp-systems/:rp-system-id/vms/protect-to-single-group/defaults",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rp-systems",
+								":rp-system-id",
+								"vms",
+								"protect-to-single-group",
+								"defaults"
+							],
+							"variable": [
+								{
+									"key": "rp-system-id",
+									"value": "8070222104833501331"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Aug 2020 14:35:17 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "RPJSESSIONID=080D5827618644157F7C4785295621B0; Path=/api/v1; Secure; HttpOnly"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000 ; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"vms\": [\n        {\n            \"vm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_50346997-9467-d16c-691c-b237a5c02d7e\",\n            \"protectedVmdks\": [\n                \"SATA (0:1)\",\n                \"NVME (0:0)\"\n            ],\n            \"protectFutureNewVmdks\": true,\n            \"replicateVmHardware\": true,\n            \"localMacAddressReplication\": false,\n            \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\"\n        },\n        {\n            \"vm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_50346d3d-c52d-8dca-e23b-5575c70d0a61\",\n            \"protectedVmdks\": [\n                \"SCSI (0:0)\"\n            ],\n            \"protectFutureNewVmdks\": true,\n            \"replicateVmHardware\": true,\n            \"localMacAddressReplication\": false,\n            \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\"\n        }\n    ],\n    \"groupName\": \"cg_2-vms\",\n    \"rpCluster\": \"433dff4829580b89\",\n    \"vc\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed\",\n    \"copies\": [\n        {\n            \"rpCluster\": \"12560a07b180d47\",\n            \"vc\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\n            \"journalDatastore\": \"697bcf66-144d-4cae-930d-6364f96350ac_547\",\n            \"journalSizeInMB\": 10240,\n            \"vmEsxCluster\": \"697bcf66-144d-4cae-930d-6364f96350ac_c52\",\n            \"vmDatastore\": \"697bcf66-144d-4cae-930d-6364f96350ac_547\",\n            \"syncReplication\": false,\n            \"rpoInSeconds\": 25,\n            \"replicaVmConfigurationForMultiVMs\": [\n                {\n                    \"productionVm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_50346997-9467-d16c-691c-b237a5c02d7e\",\n                    \"computeResource\": \"697bcf66-144d-4cae-930d-6364f96350ac_domain_c52\"\n                },\n                {\n                    \"productionVm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_50346d3d-c52d-8dca-e23b-5575c70d0a61\",\n                    \"computeResource\": \"697bcf66-144d-4cae-930d-6364f96350ac_domain_c52\"\n                }\n            ]\n        }\n    ],\n    \"productionJournalDatastore\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_87\",\n    \"productionJournalSizeInMB\": 3072\n}"
+				}
+			]
+		},
+		{
+			"name": "Protect Multi VM to Single Group",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"copies\": [\r\n        {\r\n            \"journalDatastore\": \"<string>\",\r\n            \"journalSizeInMB\": \"<long>\",\r\n            \"replicaVmConfigurationForMultiVMs\": [\r\n                {\r\n                    \"computeResource\": \"<string>\",\r\n                    \"existingReplicaVm\": \"<string>\",\r\n                    \"productionVm\": \"<string>\"\r\n                },\r\n                {\r\n                    \"computeResource\": \"<string>\",\r\n                    \"existingReplicaVm\": \"<string>\",\r\n                    \"productionVm\": \"<string>\"\r\n                }\r\n            ],\r\n            \"rpCluster\": \"<string>\",\r\n            \"rpoInSeconds\": \"<long>\",\r\n            \"syncReplication\": \"<boolean>\",\r\n            \"vc\": \"<string>\",\r\n            \"vmDatastore\": \"<string>\",\r\n            \"vmEsxCluster\": \"<string>\"\r\n        },\r\n        {\r\n            \"journalDatastore\": \"<string>\",\r\n            \"journalSizeInMB\": \"<long>\",\r\n            \"replicaVmConfigurationForMultiVMs\": [\r\n                {\r\n                    \"computeResource\": \"<string>\",\r\n                    \"existingReplicaVm\": \"<string>\",\r\n                    \"productionVm\": \"<string>\"\r\n                },\r\n                {\r\n                    \"computeResource\": \"<string>\",\r\n                    \"existingReplicaVm\": \"<string>\",\r\n                    \"productionVm\": \"<string>\"\r\n                }\r\n            ],\r\n            \"rpCluster\": \"<string>\",\r\n            \"rpoInSeconds\": \"<long>\",\r\n            \"syncReplication\": \"<boolean>\",\r\n            \"vc\": \"<string>\",\r\n            \"vmDatastore\": \"<string>\",\r\n            \"vmEsxCluster\": \"<string>\"\r\n        }\r\n    ],\r\n    \"groupName\": \"<string>\",\r\n    \"productionJournalDatastore\": \"<string>\",\r\n    \"productionJournalSizeInMB\": \"<long>\",\r\n    \"rpCluster\": \"<string>\",\r\n    \"vc\": \"<string>\",\r\n    \"vms\": [\r\n        {\r\n            \"localMacAddressReplication\": \"<boolean>\",\r\n            \"protectFutureNewVmdks\": \"<boolean>\",\r\n            \"protectedVmdks\": [\r\n                \"<string>\",\r\n                \"<string>\"\r\n            ],\r\n            \"replicaVmdkDiskProvisioningType\": \"<string>\",\r\n            \"replicateVmHardware\": \"<boolean>\",\r\n            \"vm\": \"<string>\"\r\n        },\r\n        {\r\n            \"localMacAddressReplication\": \"<boolean>\",\r\n            \"protectFutureNewVmdks\": \"<boolean>\",\r\n            \"protectedVmdks\": [\r\n                \"<string>\",\r\n                \"<string>\"\r\n            ],\r\n            \"replicaVmdkDiskProvisioningType\": \"<string>\",\r\n            \"replicateVmHardware\": \"<boolean>\",\r\n            \"vm\": \"<string>\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/rp-systems/:rp-system-id/vms/protect-to-single-group",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"rp-systems",
+						":rp-system-id",
+						"vms",
+						"protect-to-single-group"
+					],
+					"variable": [
+						{
+							"key": "rp-system-id",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Protect Multi VM to Single Group",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vms\": [\r\n        {\r\n            \"vm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_50346997-9467-d16c-691c-b237a5c02d7e\",\r\n            \"protectedVmdks\": [\r\n                \"SATA (0:1)\",\r\n                \"NVME (0:0)\"\r\n            ],\r\n            \"protectFutureNewVmdks\": true,\r\n            \"replicateVmHardware\": true,\r\n            \"localMacAddressReplication\": false,\r\n            \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\"\r\n        },\r\n        {\r\n            \"vm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_50346d3d-c52d-8dca-e23b-5575c70d0a61\",\r\n            \"protectedVmdks\": [\r\n                \"SCSI (0:0)\"\r\n            ],\r\n            \"protectFutureNewVmdks\": true,\r\n            \"replicateVmHardware\": true,\r\n            \"localMacAddressReplication\": false,\r\n            \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\"\r\n        }\r\n    ],\r\n    \"groupName\": \"cg_2-vms\",\r\n    \"rpCluster\": \"433dff4829580b89\",\r\n    \"vc\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed\",\r\n    \"copies\": [\r\n        {\r\n            \"rpCluster\": \"12560a07b180d47\",\r\n            \"vc\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\r\n            \"journalDatastore\": \"697bcf66-144d-4cae-930d-6364f96350ac_547\",\r\n            \"journalSizeInMB\": 10240,\r\n            \"vmEsxCluster\": \"697bcf66-144d-4cae-930d-6364f96350ac_c52\",\r\n            \"vmDatastore\": \"697bcf66-144d-4cae-930d-6364f96350ac_547\",\r\n            \"syncReplication\": false,\r\n            \"rpoInSeconds\": 25,\r\n            \"replicaVmConfigurationForMultiVMs\": [\r\n                {\r\n                    \"productionVm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_50346997-9467-d16c-691c-b237a5c02d7e\",\r\n                    \"computeResource\": \"697bcf66-144d-4cae-930d-6364f96350ac_domain_c52\"\r\n                },\r\n                {\r\n                    \"productionVm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_50346d3d-c52d-8dca-e23b-5575c70d0a61\",\r\n                    \"computeResource\": \"697bcf66-144d-4cae-930d-6364f96350ac_domain_c52\"\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"productionJournalDatastore\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_87\",\r\n    \"productionJournalSizeInMB\": 3072\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/rp-systems/:rp-system-id/vms/protect-to-single-group",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rp-systems",
+								":rp-system-id",
+								"vms",
+								"protect-to-single-group"
+							],
+							"variable": [
+								{
+									"key": "rp-system-id",
+									"value": "8070222104833501331"
+								}
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Aug 2020 14:44:56 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000 ; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"07e04b8a-36d9-4dba-853b-72fa7fc1e74f\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Protection Defaults - Multi-VM to Multi Groups",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vms\": [\r\n        {\r\n            \"vm\": \"<string>\"\r\n        },\r\n        {\r\n            \"vm\": \"<string>\"\r\n        }\r\n    ],\r\n    \"rpCluster\": \"<string>\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/rp-systems/:rp-system-id/vms/protect-multiple/defaults",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"rp-systems",
+						":rp-system-id",
+						"vms",
+						"protect-multiple",
+						"defaults"
+					],
+					"variable": [
+						{
+							"key": "rp-system-id",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Protection Defaults - Multi-VM to Multi Groups",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vms\": [\r\n        {\r\n            \"vm\": \"Win2k19-VBS\"\r\n        },\r\n        {\r\n            \"vm\": \"Win2k16_PRDAPP01\"\r\n        }\r\n    ],\r\n    \"rpCluster\": \"Tokyo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/rp-systems/:rp-system-id/vms/protect-multiple/defaults",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rp-systems",
+								":rp-system-id",
+								"vms",
+								"protect-multiple",
+								"defaults"
+							],
+							"variable": [
+								{
+									"key": "rp-system-id",
+									"value": "8070222104833501331"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 11:50:59 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "RPJSESSIONID=2D4F8686389ED543B5133427EA5B7F47; Path=/api/v1; Secure; HttpOnly"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000 ; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"vms\": [\n        {\n            \"vm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_50346997-9467-d16c-691c-b237a5c02d7e\",\n            \"groupName\": \"cg_Win2k19-VBS\",\n            \"protectedVmdks\": [\n                \"SATA (0:1)\",\n                \"NVME (0:0)\"\n            ],\n            \"replicateVmHardware\": true,\n            \"localMacAddressReplication\": false,\n            \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\"\n        },\n        {\n            \"vm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_50346d3d-c52d-8dca-e23b-5575c70d0a61\",\n            \"groupName\": \"cg_Win2k16_PRDAPP01\",\n            \"protectedVmdks\": [\n                \"SCSI (0:0)\"\n            ],\n            \"replicateVmHardware\": true,\n            \"localMacAddressReplication\": false,\n            \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\"\n        }\n    ],\n    \"rpCluster\": \"433dff4829580b89\",\n    \"vc\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed\",\n    \"copies\": [\n        {\n            \"rpCluster\": \"12560a07b180d47\",\n            \"vc\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\n            \"journalDatastore\": \"697bcf66-144d-4cae-930d-6364f96350ac_547\",\n            \"journalSizeInMB\": 10240,\n            \"vmEsxCluster\": \"697bcf66-144d-4cae-930d-6364f96350ac_c52\",\n            \"vmDatastore\": \"697bcf66-144d-4cae-930d-6364f96350ac_547\",\n            \"syncReplication\": false,\n            \"rpoInSeconds\": 25,\n            \"replicaVmConfigurationForMultiVMs\": [\n                {\n                    \"productionVm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_50346997-9467-d16c-691c-b237a5c02d7e\",\n                    \"computeResource\": \"697bcf66-144d-4cae-930d-6364f96350ac_domain_c52\"\n                },\n                {\n                    \"productionVm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_50346d3d-c52d-8dca-e23b-5575c70d0a61\",\n                    \"computeResource\": \"697bcf66-144d-4cae-930d-6364f96350ac_domain_c52\"\n                }\n            ]\n        }\n    ],\n    \"productionJournalDatastore\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_87\",\n    \"productionJournalSizeInMB\": 3072\n}"
+				}
+			]
+		},
+		{
+			"name": "Protect Multiple VMs to Multiple Groups",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"copies\": [\r\n        {\r\n            \"journalDatastore\": \"<string>\",\r\n            \"journalSizeInMB\": \"<long>\",\r\n            \"replicaVmConfigurationForMultiVMs\": [\r\n                {\r\n                    \"computeResource\": \"<string>\",\r\n                    \"existingReplicaVm\": \"<string>\",\r\n                    \"productionVm\": \"<string>\"\r\n                },\r\n                {\r\n                    \"computeResource\": \"<string>\",\r\n                    \"existingReplicaVm\": \"<string>\",\r\n                    \"productionVm\": \"<string>\"\r\n                }\r\n            ],\r\n            \"rpCluster\": \"<string>\",\r\n            \"rpoInSeconds\": \"<long>\",\r\n            \"syncReplication\": \"<boolean>\",\r\n            \"vc\": \"<string>\",\r\n            \"vmDatastore\": \"<string>\",\r\n            \"vmEsxCluster\": \"<string>\"\r\n        },\r\n        {\r\n            \"journalDatastore\": \"<string>\",\r\n            \"journalSizeInMB\": \"<long>\",\r\n            \"replicaVmConfigurationForMultiVMs\": [\r\n                {\r\n                    \"computeResource\": \"<string>\",\r\n                    \"existingReplicaVm\": \"<string>\",\r\n                    \"productionVm\": \"<string>\"\r\n                },\r\n                {\r\n                    \"computeResource\": \"<string>\",\r\n                    \"existingReplicaVm\": \"<string>\",\r\n                    \"productionVm\": \"<string>\"\r\n                }\r\n            ],\r\n            \"rpCluster\": \"<string>\",\r\n            \"rpoInSeconds\": \"<long>\",\r\n            \"syncReplication\": \"<boolean>\",\r\n            \"vc\": \"<string>\",\r\n            \"vmDatastore\": \"<string>\",\r\n            \"vmEsxCluster\": \"<string>\"\r\n        }\r\n    ],\r\n    \"groupName\": \"<string>\",\r\n    \"productionJournalDatastore\": \"<string>\",\r\n    \"productionJournalSizeInMB\": \"<long>\",\r\n    \"rpCluster\": \"<string>\",\r\n    \"vc\": \"<string>\",\r\n    \"vms\": [\r\n        {\r\n            \"localMacAddressReplication\": \"<boolean>\",\r\n            \"protectFutureNewVmdks\": \"<boolean>\",\r\n            \"protectedVmdks\": [\r\n                \"<string>\",\r\n                \"<string>\"\r\n            ],\r\n            \"replicaVmdkDiskProvisioningType\": \"<string>\",\r\n            \"replicateVmHardware\": \"<boolean>\",\r\n            \"vm\": \"<string>\"\r\n        },\r\n        {\r\n            \"localMacAddressReplication\": \"<boolean>\",\r\n            \"protectFutureNewVmdks\": \"<boolean>\",\r\n            \"protectedVmdks\": [\r\n                \"<string>\",\r\n                \"<string>\"\r\n            ],\r\n            \"replicaVmdkDiskProvisioningType\": \"<string>\",\r\n            \"replicateVmHardware\": \"<boolean>\",\r\n            \"vm\": \"<string>\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/rp-systems/:rp-system-id/vms/protect-multiple",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"rp-systems",
+						":rp-system-id",
+						"vms",
+						"protect-multiple"
+					],
+					"variable": [
+						{
+							"key": "rp-system-id",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Protect Multiple VMs to Multiple Groups",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vms\": [\r\n        {\r\n            \"vm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_50346997-9467-d16c-691c-b237a5c02d7e\",\r\n            \"groupName\": \"cg_Win2k19-VBS\",\r\n            \"protectedVmdks\": [\r\n                \"SATA (0:1)\",\r\n                \"NVME (0:0)\"\r\n            ],\r\n            \"replicateVmHardware\": true,\r\n            \"localMacAddressReplication\": false,\r\n            \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\"\r\n        },\r\n        {\r\n            \"vm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_50346d3d-c52d-8dca-e23b-5575c70d0a61\",\r\n            \"groupName\": \"cg_Win2k16_PRDAPP01\",\r\n            \"protectedVmdks\": [\r\n                \"SCSI (0:0)\"\r\n            ],\r\n            \"replicateVmHardware\": true,\r\n            \"localMacAddressReplication\": false,\r\n            \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\"\r\n        }\r\n    ],\r\n    \"rpCluster\": \"433dff4829580b89\",\r\n    \"vc\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed\",\r\n    \"copies\": [\r\n        {\r\n            \"rpCluster\": \"12560a07b180d47\",\r\n            \"vc\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\r\n            \"journalDatastore\": \"697bcf66-144d-4cae-930d-6364f96350ac_547\",\r\n            \"journalSizeInMB\": 10240,\r\n            \"vmEsxCluster\": \"697bcf66-144d-4cae-930d-6364f96350ac_c52\",\r\n            \"vmDatastore\": \"697bcf66-144d-4cae-930d-6364f96350ac_547\",\r\n            \"syncReplication\": false,\r\n            \"rpoInSeconds\": 25,\r\n            \"replicaVmConfigurationForMultiVMs\": [\r\n                {\r\n                    \"productionVm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_50346997-9467-d16c-691c-b237a5c02d7e\",\r\n                    \"computeResource\": \"697bcf66-144d-4cae-930d-6364f96350ac_domain_c52\"\r\n                },\r\n                {\r\n                    \"productionVm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_50346d3d-c52d-8dca-e23b-5575c70d0a61\",\r\n                    \"computeResource\": \"697bcf66-144d-4cae-930d-6364f96350ac_domain_c52\"\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"productionJournalDatastore\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_87\",\r\n    \"productionJournalSizeInMB\": 3072\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/rp-systems/:rp-system-id/vms/protect-multiple",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rp-systems",
+								":rp-system-id",
+								"vms",
+								"protect-multiple"
+							],
+							"variable": [
+								{
+									"key": "rp-system-id",
+									"value": "8070222104833501331"
+								}
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 12:03:36 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000 ; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"265abcd1-cf31-4006-aa73-5e3ab12e6742\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Protection Defaults - VM to Existing Group",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vm\": \"<string>\",\r\n    \"rpCluster\": \"<string>\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/add-vm/defaults",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"groups",
+						":groupRep",
+						"add-vm",
+						"defaults"
+					],
+					"variable": [
+						{
+							"key": "groupRep",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Protection Defaults - VM to Existing Group",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vm\": \"Win2k16_PRD01\",\r\n    \"rpClusterName\": \"Tokyo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/add-vm/defaults",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep",
+								"add-vm",
+								"defaults"
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win2k16"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 16:08:08 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "445"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"vm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_503470ca-244f-a8ec-64cd-705ac46e9af6\",\n    \"protectedVmdks\": [\n        \"SCSI (0:0)\"\n    ],\n    \"replicaChangesConfiguration\": [\n        {\n            \"copyId\": \"1302665739_12560a07b180d47_0\",\n            \"vmDatastore\": \"697bcf66-144d-4cae-930d-6364f96350ac_547\",\n            \"vmEsxCluster\": \"697bcf66-144d-4cae-930d-6364f96350ac_c52\"\n        }\n    ],\n    \"protectFutureNewVmdks\": true,\n    \"replicateVmHardware\": true,\n    \"localMacAddressReplication\": false,\n    \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Add VM to Existing Group",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"localMacAddressReplication\": \"<boolean>\",\r\n    \"protectFutureNewVmdks\": \"<boolean>\",\r\n    \"protectedVmdks\": [\r\n        \"<string>\",\r\n        \"<string>\"\r\n    ],\r\n    \"replicaChangesConfiguration\": [\r\n        {\r\n            \"copyId\": \"<string>\",\r\n            \"vmDatastore\": \"<string>\",\r\n            \"vmEsxCluster\": \"<string>\"\r\n        },\r\n        {\r\n            \"copyId\": \"<string>\",\r\n            \"vmDatastore\": \"<string>\",\r\n            \"vmEsxCluster\": \"<string>\"\r\n        }\r\n    ],\r\n    \"replicaVmdkDiskProvisioningType\": \"<string>\",\r\n    \"replicateVmHardware\": \"<boolean>\",\r\n    \"vm\": \"<string>\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/add-vm",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"groups",
+						":groupRep",
+						"add-vm"
+					],
+					"variable": [
+						{
+							"key": "groupRep",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add VM to Existing Group",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_503470ca-244f-a8ec-64cd-705ac46e9af6\",\r\n    \"protectedVmdks\": [\r\n        \"SCSI (0:0)\"\r\n    ],\r\n    \"replicaChangesConfiguration\": [\r\n        {\r\n            \"copyId\": \"1302665739_12560a07b180d47_0\",\r\n            \"vmDatastore\": \"697bcf66-144d-4cae-930d-6364f96350ac_547\",\r\n            \"vmEsxCluster\": \"697bcf66-144d-4cae-930d-6364f96350ac_c52\"\r\n        }\r\n    ],\r\n    \"protectFutureNewVmdks\": true,\r\n    \"replicateVmHardware\": true,\r\n    \"localMacAddressReplication\": false,\r\n    \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/add-vm",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep",
+								"add-vm"
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win2k16"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 16:10:04 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"eb33f2b1-45ba-4fae-a9a0-1bc95c556db6\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Protection Defaults - Multi-VM to Existing Group",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vms\": [\r\n        {\r\n            \"vm\": \"<string>\"\r\n        },\r\n        {\r\n            \"vm\": \"<string>\"\r\n        }\r\n    ],\r\n    \"rpCluster\": \"<string>\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/add-vms/defaults",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"groups",
+						":groupRep",
+						"add-vms",
+						"defaults"
+					],
+					"variable": [
+						{
+							"key": "groupRep",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Protection Defaults - Multi-VM to Existing Group",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vms\": [\r\n        {\r\n            \"vm\": \"CentOS_PRD1\"\r\n        },\r\n        {\r\n            \"vm\": \"RHEL7_DB2\"\r\n        }\r\n    ],\r\n    \"rpCluster\": \"Tokyo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/add-vms/defaults",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep",
+								"add-vms",
+								"defaults"
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win_Linux_Prod"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 16:20:00 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "726"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"vms\": [\n        {\n            \"vm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_5034cf51-2ea2-01e2-3144-1de458dfdd23\",\n            \"protectedVmdks\": [\n                \"SCSI (0:0)\"\n            ],\n            \"protectFutureNewVmdks\": true,\n            \"replicateVmHardware\": true,\n            \"localMacAddressReplication\": false,\n            \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\"\n        },\n        {\n            \"vm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_3b534664-f2e0-9f05-514a-7c9ed860b2aa\",\n            \"protectedVmdks\": [\n                \"SCSI (0:0)\"\n            ],\n            \"protectFutureNewVmdks\": true,\n            \"replicateVmHardware\": true,\n            \"localMacAddressReplication\": false,\n            \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\"\n        }\n    ],\n    \"replicaChangesConfiguration\": [\n        {\n            \"copyId\": \"1302665739_12560a07b180d47_0\",\n            \"replicaVmDatastore\": \"697bcf66-144d-4cae-930d-6364f96350ac_547\",\n            \"replicaVmEsxCluster\": \"697bcf66-144d-4cae-930d-6364f96350ac_c52\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Add Multiple VMs to Existing Group",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"replicaChangesConfiguration\": [\r\n        {\r\n            \"copyId\": \"<string>\",\r\n            \"replicaVmConfigurations\": [\r\n                {\r\n                    \"computeResource\": \"<string>\",\r\n                    \"existingReplicaVm\": \"<string>\",\r\n                    \"productionVm\": \"<string>\"\r\n                },\r\n                {\r\n                    \"computeResource\": \"<string>\",\r\n                    \"existingReplicaVm\": \"<string>\",\r\n                    \"productionVm\": \"<string>\"\r\n                }\r\n            ],\r\n            \"replicaVmDatastore\": \"<string>\",\r\n            \"replicaVmEsxCluster\": \"<string>\"\r\n        },\r\n        {\r\n            \"copyId\": \"<string>\",\r\n            \"replicaVmConfigurations\": [\r\n                {\r\n                    \"computeResource\": \"<string>\",\r\n                    \"existingReplicaVm\": \"<string>\",\r\n                    \"productionVm\": \"<string>\"\r\n                },\r\n                {\r\n                    \"computeResource\": \"<string>\",\r\n                    \"existingReplicaVm\": \"<string>\",\r\n                    \"productionVm\": \"<string>\"\r\n                }\r\n            ],\r\n            \"replicaVmDatastore\": \"<string>\",\r\n            \"replicaVmEsxCluster\": \"<string>\"\r\n        }\r\n    ],\r\n    \"vms\": [\r\n        {\r\n            \"localMacAddressReplication\": \"<boolean>\",\r\n            \"protectFutureNewVmdks\": \"<boolean>\",\r\n            \"protectedVmdks\": [\r\n                \"<string>\",\r\n                \"<string>\"\r\n            ],\r\n            \"replicaVmdkDiskProvisioningType\": \"<string>\",\r\n            \"replicateVmHardware\": \"<boolean>\",\r\n            \"vm\": \"<string>\"\r\n        },\r\n        {\r\n            \"localMacAddressReplication\": \"<boolean>\",\r\n            \"protectFutureNewVmdks\": \"<boolean>\",\r\n            \"protectedVmdks\": [\r\n                \"<string>\",\r\n                \"<string>\"\r\n            ],\r\n            \"replicaVmdkDiskProvisioningType\": \"<string>\",\r\n            \"replicateVmHardware\": \"<boolean>\",\r\n            \"vm\": \"<string>\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/add-vms",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"groups",
+						":groupRep",
+						"add-vms"
+					],
+					"variable": [
+						{
+							"key": "groupRep",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add Multiple VMs to Existing Group",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vms\": [\r\n        {\r\n            \"vm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_5034cf51-2ea2-01e2-3144-1de458dfdd23\",\r\n            \"protectedVmdks\": [\r\n                \"SCSI (0:0)\"\r\n            ],\r\n            \"protectFutureNewVmdks\": true,\r\n            \"replicateVmHardware\": true,\r\n            \"localMacAddressReplication\": false,\r\n            \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\"\r\n        },\r\n        {\r\n            \"vm\": \"109b5ca1-2bda-46c6-b7e1-d61b81480aed_3b534664-f2e0-9f05-514a-7c9ed860b2aa\",\r\n            \"protectedVmdks\": [\r\n                \"SCSI (0:0)\"\r\n            ],\r\n            \"protectFutureNewVmdks\": true,\r\n            \"replicateVmHardware\": true,\r\n            \"localMacAddressReplication\": false,\r\n            \"replicaVmdkDiskProvisioningType\": \"SAME_AS_SOURCE\"\r\n        }\r\n    ],\r\n    \"replicaChangesConfiguration\": [\r\n        {\r\n            \"copyId\": \"1302665739_12560a07b180d47_0\",\r\n            \"replicaVmDatastore\": \"697bcf66-144d-4cae-930d-6364f96350ac_547\",\r\n            \"replicaVmEsxCluster\": \"697bcf66-144d-4cae-930d-6364f96350ac_c52\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/add-vms",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep",
+								"add-vms"
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win_Linux_Prod"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 16:21:50 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"d4f8089d-c346-4614-a609-1bc7a1898278\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Unprotect VM",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/vms/{{vmRep}}",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"vms",
+						"{{vmRep}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Unprotect VM",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/vm/Win2k16_PRD05",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vm",
+								"Win2k16_PRD05"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 23 Jul 2020 15:57:43 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1432"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"13c2c1fd-52a3-4c3e-8bb8-0ce595423512\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Group Sets",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/group-sets",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"group-sets"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Group Sets",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/group-sets",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"group-sets"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 12:11:49 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "176"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"groups\": [\n            \"436425142\",\n            \"268360200\",\n            \"228780518\",\n            \"674253025\"\n        ],\n        \"id\": \"1165365635cfadc9\",\n        \"name\": \"PROD\",\n        \"parallelBookmarkFrequencyInSeconds\": 600,\n        \"parallelBookmarkingEnabled\": true\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Create Group Set",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"groups\": [\r\n        \"<string>\",\r\n        \"<string>\"\r\n    ],\r\n    \"name\": \"<string>\",\r\n    \"parallelBookmarkFrequencyInSeconds\": \"<integer>\",\r\n    \"parallelBookmarkingEnabled\": \"<boolean>\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/rp-systems/:rp-system-id/group-sets",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"rp-systems",
+						":rp-system-id",
+						"group-sets"
+					],
+					"variable": [
+						{
+							"key": "rp-system-id",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create Group Set",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"groups\": [\r\n        \"436425142\",\r\n        \"268360200\",\r\n        \"228780518\"\r\n    ],\r\n    \"name\": \"Win_PROD\",\r\n    \"parallelBookmarkFrequencyInSeconds\": \"3600\",\r\n    \"parallelBookmarkingEnabled\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/rp-systems/:rp-system-id/group-sets",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rp-systems",
+								":rp-system-id",
+								"group-sets"
+							],
+							"variable": [
+								{
+									"key": "rp-system-id",
+									"value": "8070222104833501331"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 12:27:40 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000 ; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"885fdb5e56515de1\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create Bookmark",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookmarkName\": \"<string>\",\r\n    \"consistencyType\": \"<string>\",\r\n    \"consolidationPolicy\": \"<string>\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/bookmarks",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"groups",
+						":groupRep",
+						"bookmarks"
+					],
+					"variable": [
+						{
+							"key": "groupRep",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create Bookmark",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookmarkName\": \"Before_upgrade\",\r\n    \"consistencyType\": \"APPLICATION_CONSISTENT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/bookmarks",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep",
+								"bookmarks"
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win2k19-VBS"
+								}
+							]
+						}
+					},
+					"status": "NO CONTENT",
+					"code": 204,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 12:41:09 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Create Bookmark - Group Set",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookmarkName\": \"<string>\",\r\n    \"consistencyType\": \"<string>\",\r\n    \"consolidationPolicy\": \"<string>\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/group-sets/:groupSetRep/bookmarks",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"group-sets",
+						":groupSetRep",
+						"bookmarks"
+					],
+					"variable": [
+						{
+							"key": "groupSetRep",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create Bookmark - Group Set",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookmarkName\": \"Before_DB_Upgrade\",\r\n    \"consistencyType\": \"APPLICATION_CONSISTENT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/group-sets/:groupSetRep/bookmarks",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"group-sets",
+								":groupSetRep",
+								"bookmarks"
+							],
+							"variable": [
+								{
+									"key": "groupSetRep",
+									"value": "Win_PROD"
+								}
+							]
+						}
+					},
+					"status": "NO CONTENT",
+					"code": 204,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 15:41:33 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Enable Group",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"<string>\",\r\n    \"enabled\": \"<boolean>\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"groups",
+						":groupRep"
+					],
+					"variable": [
+						{
+							"key": "groupRep",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Enable Group",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"1758284640\",\r\n    \"enabled\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep"
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win2k12_PRD01"
+								}
+							]
+						}
+					},
+					"status": "NO CONTENT",
+					"code": 204,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 15:32:11 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Disable Group",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"<string>\",\r\n    \"enabled\": \"<boolean>\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"groups",
+						":groupRep"
+					],
+					"variable": [
+						{
+							"key": "groupRep",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Disable Group",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1758284640,\r\n    \"enabled\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep"
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win2k12_PRD01"
+								}
+							]
+						}
+					},
+					"status": "NO CONTENT",
+					"code": 204,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 15:36:57 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Resume Transfer - Group",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"transferEnabled\": \"<boolean>\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"groups",
+						":groupRep",
+						"copies",
+						":copyId"
+					],
+					"variable": [
+						{
+							"key": "groupRep",
+							"value": "<string>"
+						},
+						{
+							"key": "copyId",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Stop Transfer - Group",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"transferEnabled\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep",
+								"copies",
+								":copyId"
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win2k12_PRD01"
+								},
+								{
+									"key": "copyId",
+									"value": "1758284640_433dff4829580b89_0"
+								}
+							]
+						}
+					},
+					"status": "NO CONTENT",
+					"code": 204,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 15:50:43 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Pause Transfer - Group",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"transferEnabled\": \"<boolean>\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"groups",
+						":groupRep",
+						"copies",
+						":copyId"
+					],
+					"variable": [
+						{
+							"key": "groupRep",
+							"value": "<string>"
+						},
+						{
+							"key": "copyId",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Pause Transfer - Group",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transferEnabled\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep",
+								"copies",
+								":copyId"
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win2k12_PRD01"
+								},
+								{
+									"key": "copyId",
+									"value": "1758284640_433dff4829580b89_0"
+								}
+							]
+						}
+					},
+					"status": "NO CONTENT",
+					"code": 204,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 15:46:39 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Resume Transfer - Group Set",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"autoExcludeOnError\": false,\r\n    \"groupsToExclude\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/group-sets/:groupSetRep/resume-transfer",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"group-sets",
+						":groupSetRep",
+						"resume-transfer"
+					],
+					"variable": [
+						{
+							"key": "groupSetRep",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Resume Transfer - Group Set",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"autoExcludeOnError\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/group-sets/:groupSetRep/resume-transfer",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"group-sets",
+								":groupSetRep",
+								"resume-transfer"
+							],
+							"variable": [
+								{
+									"key": "groupSetRep",
+									"value": "Win_PROD"
+								}
+							]
+						}
+					},
+					"status": "NO CONTENT",
+					"code": 204,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 15:54:49 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Pause Transfer - Group Set",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"autoExcludeOnError\": false,\r\n    \"groupsToExclude\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/group-sets/:groupSetRep/pause-transfer",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"group-sets",
+						":groupSetRep",
+						"pause-transfer"
+					],
+					"variable": [
+						{
+							"key": "groupSetRep",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Resume Transfer - Group Set",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"autoExcludeOnError\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/group-sets/:groupSetRep/resume-transfer",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"group-sets",
+								":groupSetRep",
+								"resume-transfer"
+							],
+							"variable": [
+								{
+									"key": "groupSetRep",
+									"value": "Win_PROD"
+								}
+							]
+						}
+					},
+					"status": "NO CONTENT",
+					"code": 204,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 15:54:49 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "List Snapshots",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId/snapshots?fromTime=<string>&endTime=<string>&bookmarkKeyword=<string>",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"groups",
+						":groupRep",
+						"copies",
+						":copyId",
+						"snapshots"
+					],
+					"query": [
+						{
+							"key": "fromTime",
+							"value": "<string>"
+						},
+						{
+							"key": "endTime",
+							"value": "<string>"
+						},
+						{
+							"key": "bookmarkKeyword",
+							"value": "<string>"
+						}
+					],
+					"variable": [
+						{
+							"key": "groupRep",
+							"value": "<string>"
+						},
+						{
+							"key": "copyId",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "List Snapshots",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId/snapshots?fromTime=2020-08-27T17:00Z&endTime=2020-08-27T19:00Z&bookmarkKeyword=upgrade",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep",
+								"copies",
+								":copyId",
+								"snapshots"
+							],
+							"query": [
+								{
+									"key": "fromTime",
+									"value": "2020-08-27T17:00Z"
+								},
+								{
+									"key": "endTime",
+									"value": "2020-08-27T19:00Z"
+								},
+								{
+									"key": "bookmarkKeyword",
+									"value": "upgrade"
+								}
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win2k19-VBS"
+								},
+								{
+									"key": "copyId",
+									"value": "1442098281_12560a07b180d47_0"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 12:58:26 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "155"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"1598553773615587\",\n        \"timestamp\": \"2020-08-27T18:42:53.615Z\",\n        \"sizeInBytes\": 216,\n        \"bookmarkName\": \"Before_upgrade\",\n        \"consistencyType\": \"CRASH_CONSISTENT\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Available Test Networks",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId/available-test-networks",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"groups",
+						":groupRep",
+						"copies",
+						":copyId",
+						"available-test-networks"
+					],
+					"variable": [
+						{
+							"key": "groupRep",
+							"value": "<string>"
+						},
+						{
+							"key": "copyId",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Available Test Networks",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId/available-test-networks",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep",
+								"copies",
+								":copyId",
+								"available-test-networks"
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win2k16_PRD02"
+								},
+								{
+									"key": "copyId",
+									"value": "228780518_12560a07b180d47_0"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 14:43:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "155"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"network-127\",\n        \"name\": \"DMZ\"\n    },\n    {\n        \"id\": \"network-126\",\n        \"name\": \"RP4VMs_Data\"\n    },\n    {\n        \"id\": \"network-128\",\n        \"name\": \"vMotion\"\n    },\n    {\n        \"id\": \"network-35\",\n        \"name\": \"VM Network\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Test Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"snapshotId\": \"<string>\",\r\n    \"imageAccessScenario\": \"TEST_COPY\",\r\n    \"networkId\": \"<string>\",\r\n    \"powerOnVms\": true,\r\n    \"testNetworkType\": \"ISOLATED_PER_CG\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId/test-copy",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"groups",
+						":groupRep",
+						"copies",
+						":copyId",
+						"test-copy"
+					],
+					"variable": [
+						{
+							"key": "groupRep",
+							"value": "<string>"
+						},
+						{
+							"key": "copyId",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Test Copy",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imageAccessScenario\": \"TEST_COPY\",\r\n    \"powerOnVms\": true,\r\n    \"testNetworkType\": \"MANUAL\",\r\n    \"networkId\": \"network-35\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId/test-copy",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep",
+								"copies",
+								":copyId",
+								"test-copy"
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win2k19-VBS"
+								},
+								{
+									"key": "copyId",
+									"value": "1442098281_12560a07b180d47_0"
+								}
+							]
+						}
+					},
+					"status": "ACCEPTED",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 13:24:34 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"80c3e683-1c24-4892-b2f7-db53fce98992\"\n}"
+				},
+				{
+					"name": "Test Copy - Failover",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imageAccessScenario\": \"FAILOVER\",\r\n    \"testNetworkType\": \"ISOLATED_PER_CG\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId/test-copy",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep",
+								"copies",
+								":copyId",
+								"test-copy"
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win2k19-VBS"
+								},
+								{
+									"key": "copyId",
+									"value": "1442098281_12560a07b180d47_0"
+								}
+							]
+						}
+					},
+					"status": "ACCEPTED",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 13:47:15 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"a6ef0fb6-5a76-4166-8c1d-ccbb8b35d8e8\"\n}"
+				},
+				{
+					"name": "Test Copy - Recover Production",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imageAccessScenario\": \"RECOVER_PRODUCTION\",\r\n    \"snapshotId\": 1598553773615587\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId/test-copy",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep",
+								"copies",
+								":copyId",
+								"test-copy"
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win2k19-VBS"
+								},
+								{
+									"key": "copyId",
+									"value": "1442098281_12560a07b180d47_0"
+								}
+							]
+						}
+					},
+					"status": "ACCEPTED",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 13:48:48 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"889e4b9f-ba73-4522-a187-736c76dfd63e\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Failover",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"applyFailoverNetworks\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId/failover",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"groups",
+						":groupRep",
+						"copies",
+						":copyId",
+						"failover"
+					],
+					"variable": [
+						{
+							"key": "groupRep",
+							"value": "<string>"
+						},
+						{
+							"key": "copyId",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Failover",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"applyFailoverNetworks\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId/failover",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep",
+								"copies",
+								":copyId",
+								"failover"
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win2k19-VBS"
+								},
+								{
+									"key": "copyId",
+									"value": "1442098281_12560a07b180d47_0"
+								}
+							]
+						}
+					},
+					"status": "ACCEPTED",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 13:53:54 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"f831fae1-4a3f-4410-8b39-8c22dd687594\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Recover Production",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId/recover-production",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"groups",
+						":groupRep",
+						"copies",
+						":copyId",
+						"recover-production"
+					],
+					"variable": [
+						{
+							"key": "groupRep",
+							"value": "<string>"
+						},
+						{
+							"key": "copyId",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Recover Production",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId/recover-production",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep",
+								"copies",
+								":copyId",
+								"recover-production"
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win2k16_PRD02"
+								},
+								{
+									"key": "copyId",
+									"value": "228780518_12560a07b180d47_0"
+								}
+							]
+						}
+					},
+					"status": "ACCEPTED",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 14:34:00 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"ea8e769e-5fed-472e-a04f-61c813af7322\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Disable Test Copy",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId/test-copy",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"groups",
+						":groupRep",
+						"copies",
+						":copyId",
+						"test-copy"
+					],
+					"variable": [
+						{
+							"key": "groupRep",
+							"value": "<string>"
+						},
+						{
+							"key": "copyId",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Disable Test Copy",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/:groupRep/copies/:copyId/test-copy",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								":groupRep",
+								"copies",
+								":copyId",
+								"test-copy"
+							],
+							"variable": [
+								{
+									"key": "groupRep",
+									"value": "cg_Win2k16_PRD02"
+								},
+								{
+									"key": "copyId",
+									"value": "228780518_12560a07b180d47_0"
+								}
+							]
+						}
+					},
+					"status": "ACCEPTED",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 14:38:51 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"f9f61b02-75ba-4f21-8912-b5d4c581f120\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Test Copy - Group Set",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookmarkName\": \"<string>\",\r\n    \"groupsToExclude\": [\r\n        \"<string>\",\r\n        \"<string>\"\r\n    ],\r\n    \"imageAccessScenario\": \"<string>\",\r\n    \"networkId\": \"<string>\",\r\n    \"powerOnVms\": true,\r\n    \"rpClusterId\": \"<string>\",\r\n    \"snapshotId\": \"<string>\",\r\n    \"testNetworkType\": \"<string>\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/group-sets/:groupSetRep/test-copy",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"group-sets",
+						":groupSetRep",
+						"test-copy"
+					],
+					"variable": [
+						{
+							"key": "groupSetRep",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Test Copy - Group Set",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imageAccessScenario\": \"TEST_COPY\",\r\n    \"powerOnVms\": true,\r\n    \"testNetworkType\": \"MANUAL\",\r\n    \"networkId\": \"network-13\",\r\n    \"rpClusterId\": \"12560a07b180d47\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/group-sets/:groupSetRep/test-copy",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"group-sets",
+								":groupSetRep",
+								"test-copy"
+							],
+							"variable": [
+								{
+									"key": "groupSetRep",
+									"value": "Win_PROD"
+								}
+							]
+						}
+					},
+					"status": "ACCEPTED",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 14:57:55 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"30db9518-3350-4cbe-8399-9e52b3c13739\"\n}"
+				},
+				{
+					"name": "Test Copy - Group Set - Recover Production",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imageAccessScenario\": \"RECOVER_PRODUCTION\",\r\n    \"powerOnVms\": true,\r\n    \"testNetworkType\": \"ISOLATED_PER_CG\",\r\n    \"snapshotId\": \"1598562342042299\",\r\n    \"rpClusterId\": \"12560a07b180d47\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/group-sets/:groupSetRep/test-copy",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"group-sets",
+								":groupSetRep",
+								"test-copy"
+							],
+							"variable": [
+								{
+									"key": "groupSetRep",
+									"value": "Win_PROD"
+								}
+							]
+						}
+					},
+					"status": "ACCEPTED",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 15:07:09 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"56559e1d-55e8-48b7-9973-6632b9b5b6e4\"\n}"
+				},
+				{
+					"name": "Test Copy - Group Set - Failover",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"imageAccessScenario\": \"FAILOVER\",\r\n    \"bookmarkName\": \"Post-Prod-Commit\",\r\n    \"powerOnVms\": true,\r\n    \"testNetworkType\": \"ISOLATED_PER_CG\",\r\n    \"rpClusterId\": \"12560a07b180d47\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/group-sets/:groupSetRep/test-copy",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"group-sets",
+								":groupSetRep",
+								"test-copy"
+							],
+							"variable": [
+								{
+									"key": "groupSetRep",
+									"value": "Win_PROD"
+								}
+							]
+						}
+					},
+					"status": "ACCEPTED",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 15:10:24 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"9e5354a1-e0ee-4bf5-b2bb-26425623cf37\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Failover - Group Set",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rpClusterId\": \"<string>\",\r\n    \"groupsToExclude\": [\r\n        \"<string>\",\r\n        \"<string>\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/group-sets/:groupSetRep/failover",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"group-sets",
+						":groupSetRep",
+						"failover"
+					],
+					"variable": [
+						{
+							"key": "groupSetRep",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Failover - Group Set",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rpClusterId\": \"12560a07b180d47\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/group-sets/:groupSetRep/failover",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"group-sets",
+								":groupSetRep",
+								"failover"
+							],
+							"variable": [
+								{
+									"key": "groupSetRep",
+									"value": "Win_PROD"
+								}
+							]
+						}
+					},
+					"status": "ACCEPTED",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 15:16:46 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"0e41e737-0370-4374-bb35-2a8d61800b5a\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Recover Production- Group Set",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rpClusterId\": \"<string>\",\r\n    \"groupsToExclude\": [\r\n        \"<string>\",\r\n        \"<string>\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/group-sets/:groupSetRep/recover-production",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"group-sets",
+						":groupSetRep",
+						"recover-production"
+					],
+					"variable": [
+						{
+							"key": "groupSetRep",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Recover Production- Group Set",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rpClusterId\": \"12560a07b180d47\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/group-sets/:groupSetRep/recover-production",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"group-sets",
+								":groupSetRep",
+								"recover-production"
+							],
+							"variable": [
+								{
+									"key": "groupSetRep",
+									"value": "Win_PROD"
+								}
+							]
+						}
+					},
+					"status": "ACCEPTED",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 15:24:22 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"c22d5491-0e55-4077-bf43-d0149f9dd75f\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Disable Test Copy - Group Set",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/group-sets/:groupSetRep/test-copy",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"group-sets",
+						":groupSetRep",
+						"test-copy"
+					],
+					"variable": [
+						{
+							"key": "groupSetRep",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Disable Test Copy - Group Set",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/group-sets/:groupSetRep/test-copy",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"group-sets",
+								":groupSetRep",
+								"test-copy"
+							],
+							"variable": [
+								{
+									"key": "groupSetRep",
+									"value": "Win_PROD"
+								}
+							]
+						}
+					},
+					"status": "BAD REQUEST",
+					"code": 400,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 15:01:10 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Get Recovery Activities - Groups",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/transactions/:transacationid",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"transactions",
+						":transacationid"
+					],
+					"variable": [
+						{
+							"key": "transacationid",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Recovery Activities - Groups",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/recovery-activities",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								"recovery-activities"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 13:29:00 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "521"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"activityType\": \"TEST_COPY\",\n        \"copyId\": \"1442098281_12560a07b180d47_0\",\n        \"copyJournalUsage\": 3,\n        \"copyRole\": \"REMOTE_REPLICA\",\n        \"groupId\": \"1442098281\",\n        \"groupName\": \"cg_Win2k19-VBS\",\n        \"id\": \"1442098281_12560a07b180d47_0_TEST_COPY_1\",\n        \"nextActions\": [\n            \"CONTINUE_TEST\",\n            \"FINISH_TEST\"\n        ],\n        \"rpClusterId\": \"12560a07b180d47\",\n        \"rpClusterName\": \"Venice\",\n        \"snapshotId\": \"1598556377853090\",\n        \"snapshotTimestamp\": \"2020-08-27T19:26:17.853Z\",\n        \"startedOn\": \"2020-08-27T19:26:19.070Z\",\n        \"status\": \"READY_FOR_TESTING\",\n        \"testCopyBufferUsage\": 0,\n        \"testNetworkType\": \"MANUAL\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Recovery Activities - Group-Sets",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/group-sets/recovery-activities",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"group-sets",
+						"recovery-activities"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Recovery Activities - Group-Sets",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/group-sets/recovery-activities",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"group-sets",
+								"recovery-activities"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 13:33:46 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "520"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"activityType\": \"TEST_COPY\",\n        \"excludedGroups\": [],\n        \"groupSetId\": \"885fdb5e56515de1\",\n        \"groupSetName\": \"Win_PROD\",\n        \"groupsInError\": [],\n        \"groupsPoweringOnVms\": [\n            \"674253025\",\n            \"1442098281\"\n        ],\n        \"groupsPreparingImage\": [],\n        \"groupsReadyForTesting\": [],\n        \"id\": \"885fdb5e56515de1_12560a07b180d47_TEST_COPY_0\",\n        \"nextActions\": [\n            \"FINISH_TEST\"\n        ],\n        \"participatingGroups\": [\n            \"674253025\",\n            \"1442098281\"\n        ],\n        \"rpClusterId\": \"12560a07b180d47\",\n        \"rpClusterName\": \"Venice\",\n        \"startedOn\": \"2020-08-27T19:35:21.153Z\",\n        \"status\": \"POWERING_ON_VMS\",\n        \"testNetworkType\": \"ISOLATED_PER_CG\"\n    }\n]"
+				},
+				{
+					"name": "Get Recovery Activities - Groups",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/groups/recovery-activities",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"groups",
+								"recovery-activities"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 27 Aug 2020 13:29:00 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "521"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"activityType\": \"TEST_COPY\",\n        \"copyId\": \"1442098281_12560a07b180d47_0\",\n        \"copyJournalUsage\": 3,\n        \"copyRole\": \"REMOTE_REPLICA\",\n        \"groupId\": \"1442098281\",\n        \"groupName\": \"cg_Win2k19-VBS\",\n        \"id\": \"1442098281_12560a07b180d47_0_TEST_COPY_1\",\n        \"nextActions\": [\n            \"CONTINUE_TEST\",\n            \"FINISH_TEST\"\n        ],\n        \"rpClusterId\": \"12560a07b180d47\",\n        \"rpClusterName\": \"Venice\",\n        \"snapshotId\": \"1598556377853090\",\n        \"snapshotTimestamp\": \"2020-08-27T19:26:17.853Z\",\n        \"startedOn\": \"2020-08-27T19:26:19.070Z\",\n        \"status\": \"READY_FOR_TESTING\",\n        \"testCopyBufferUsage\": 0,\n        \"testNetworkType\": \"MANUAL\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Transactions - Specific",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/transactions/:transacationid",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"transactions",
+						":transacationid"
+					],
+					"variable": [
+						{
+							"key": "transacationid",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Transaction - Specific",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/transactions/:transacationid",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								":transacationid"
+							],
+							"variable": [
+								{
+									"key": "transacationid",
+									"value": "b87ff54b-2e00-4415-b26c-a4af4747833d"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Aug 2020 13:50:40 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "334"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"b87ff54b-2e00-4415-b26c-a4af4747833d\",\n    \"progressPercentage\": 100,\n    \"progressString\": \"Consistency group cg_Win2k12_PRD01 created\",\n    \"resourceId\": \"697bcf66-144d-4cae-930d-6364f96350ac_500db489-a0eb-9f8b-f228-447b7afff8eb\",\n    \"status\": \"COMPLETED\",\n    \"timeCreated\": \"2020-08-25T19:49:22.265Z\",\n    \"type\": \"PROTECT_VMS\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Transactions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/transactions",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"transactions"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Transaction - Specific",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/transactions/:transacationid",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								":transacationid"
+							],
+							"variable": [
+								{
+									"key": "transacationid",
+									"value": "b87ff54b-2e00-4415-b26c-a4af4747833d"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Aug 2020 13:50:40 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "334"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"b87ff54b-2e00-4415-b26c-a4af4747833d\",\n    \"progressPercentage\": 100,\n    \"progressString\": \"Consistency group cg_Win2k12_PRD01 created\",\n    \"resourceId\": \"697bcf66-144d-4cae-930d-6364f96350ac_500db489-a0eb-9f8b-f228-447b7afff8eb\",\n    \"status\": \"COMPLETED\",\n    \"timeCreated\": \"2020-08-25T19:49:22.265Z\",\n    \"type\": \"PROTECT_VMS\"\n}"
+				},
+				{
+					"name": "Get Transactions",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/transactions",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"transactions"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Aug 2020 13:52:44 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1187"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"b6ec961d-e48a-4fc0-b250-1ce25dd7481a\",\n        \"progressPercentage\": 100,\n        \"progressString\": \"Plugin server upgrade completed successfully.\",\n        \"status\": \"COMPLETED\",\n        \"timeCreated\": \"2020-08-06T05:42:00Z\",\n        \"type\": \"UPGRADE_RPCENTER\"\n    },\n    {\n        \"id\": \"0db4b1bb-90df-4d80-9223-97fe674deec7\",\n        \"progressPercentage\": 100,\n        \"progressString\": \"Plugin server upgrade completed successfully.\",\n        \"status\": \"COMPLETED\",\n        \"timeCreated\": \"2020-08-08T12:46:05Z\",\n        \"type\": \"UPGRADE_RPCENTER\"\n    },\n    {\n        \"id\": \"1a10e991-3b2e-4f06-9012-5a2eae5a788e\",\n        \"progressPercentage\": 100,\n        \"progressString\": \"Plugin server upgrade completed successfully.\",\n        \"status\": \"COMPLETED\",\n        \"timeCreated\": \"2020-08-10T03:14:45Z\",\n        \"type\": \"UPGRADE_RPCENTER\"\n    },\n    {\n        \"id\": \"0fb67a50-879e-4600-9ac4-2142dda93d80\",\n        \"progressPercentage\": 100,\n        \"progressString\": \"Plugin server upgrade completed successfully.\",\n        \"status\": \"COMPLETED\",\n        \"timeCreated\": \"2020-08-16T05:33:43Z\",\n        \"type\": \"UPGRADE_RPCENTER\"\n    },\n    {\n        \"id\": \"b87ff54b-2e00-4415-b26c-a4af4747833d\",\n        \"progressPercentage\": 100,\n        \"progressString\": \"Consistency group cg_Win2k12_PRD01 created\",\n        \"resourceId\": \"697bcf66-144d-4cae-930d-6364f96350ac_500db489-a0eb-9f8b-f228-447b7afff8eb\",\n        \"status\": \"COMPLETED\",\n        \"timeCreated\": \"2020-08-25T19:49:22.265Z\",\n        \"type\": \"PROTECT_VMS\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Alerts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/alerts",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"alerts"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Alerts",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/alerts",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"alerts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Aug 2020 12:13:02 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2604"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"category\": \"SYSTEM\",\n        \"description\": \"You are using an unlicensed trial version for non-commercial use only of Dell EMC RecoverPoint for VMs.\",\n        \"id\": \"e9ed28dd44694412\",\n        \"severity\": \"WARNING\"\n    },\n    {\n        \"category\": \"RPA\",\n        \"description\": \"At least two virtual RPAs are running on same ESX. It is recommended to run only one virtual RPA on an ESX. Use vMotion to move extra RPAs to other ESXs. ; Tokyo\",\n        \"id\": \"d9bdb3d74691f67f\",\n        \"rpClusterId\": \"433dff4829580b89\",\n        \"rpClusterName\": \"Tokyo\",\n        \"severity\": \"WARNING\"\n    },\n    {\n        \"category\": \"SPLITTER\",\n        \"description\": \"Venice_HA1-dmbuo103.lss.emc.com's connection with RPA 1 is down\",\n        \"id\": \"e2c6a0248680feac\",\n        \"rpClusterId\": \"12560a07b180d47\",\n        \"rpClusterName\": \"Venice\",\n        \"severity\": \"ERROR\"\n    },\n    {\n        \"category\": \"SPLITTER\",\n        \"description\": \"Venice_HA1-dmbuo105.lss.emc.com's connection with RPA 2 is down\",\n        \"id\": \"502769b3c1ead933\",\n        \"rpClusterId\": \"12560a07b180d47\",\n        \"rpClusterName\": \"Venice\",\n        \"severity\": \"ERROR\"\n    },\n    {\n        \"category\": \"DEVICE\",\n        \"description\": \"User volume [cg_Win2k16_DB02, Prod, CG_RSET_Win2k16_DB02_1_0_scsi] cannot be accessed by: RPA 2\",\n        \"id\": \"d04c08aabfcf6298\",\n        \"rpClusterId\": \"12560a07b180d47\",\n        \"rpClusterName\": \"Venice\",\n        \"severity\": \"ERROR\"\n    },\n    {\n        \"category\": \"DEVICE\",\n        \"description\": \"User volume [cg_Win2k16_DB02, Prod, CG_RSET_Win2k16_DB02_0_0_scsi] cannot be accessed by: RPA 2\",\n        \"id\": \"e1a1ab66447abdc0\",\n        \"rpClusterId\": \"12560a07b180d47\",\n        \"rpClusterName\": \"Venice\",\n        \"severity\": \"ERROR\"\n    },\n    {\n        \"category\": \"CONSISTENCY_GROUP\",\n        \"description\": \"The vRPA RPA 2 and Protected VM/VMs (rp.Win2k16_PRD02.copy.shadow, rp.Win2k16_DB01.copy.shadow, rp.Ubuntu16_PRD01.copy.shadow) are running on the ESXi host Venice_HA1-dmbuo103.lss.emc.com. A VM, and the vRPA that is replicating that VM, should not run on the same ESXi host. If you have any such VM/vRPA pairs, it is recommended to use vMotion to move one of them to another ESXi host.\",\n        \"id\": \"14bbefd085839532\",\n        \"rpClusterId\": \"12560a07b180d47\",\n        \"rpClusterName\": \"Venice\",\n        \"severity\": \"WARNING\"\n    },\n    {\n        \"category\": \"CONSISTENCY_GROUP\",\n        \"description\": \"The vRPA RPA 2 and Protected VM/VMs (Win2k16_PRD02, Win2k16_DB01) are running on the ESXi host Tokyo_HA1-dmbuo153.lss.emc.com. A VM, and the vRPA that is replicating that VM, should not run on the same ESXi host. If you have any such VM/vRPA pairs, it is recommended to use vMotion to move one of them to another ESXi host.\",\n        \"id\": \"7eee310bc082b91f\",\n        \"rpClusterId\": \"433dff4829580b89\",\n        \"rpClusterName\": \"Tokyo\",\n        \"severity\": \"WARNING\"\n    },\n    {\n        \"category\": \"DEVICE\",\n        \"description\": \"User volume [cg_RHEL7_DB1, Prod, CG_RSET_RHEL7_DB1_0_0_scsi] cannot be accessed by: RPA 1\",\n        \"id\": \"cf522f2e55ddb662\",\n        \"rpClusterId\": \"12560a07b180d47\",\n        \"rpClusterName\": \"Venice\",\n        \"severity\": \"ERROR\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Alerts - Non-OK",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/rp-clusters",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"rp-clusters"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Alerts - Non-OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/alerts?severity=ERROR,WARNING",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"alerts"
+							],
+							"query": [
+								{
+									"key": "severity",
+									"value": "ERROR,WARNING"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Aug 2020 12:16:11 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2604"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"category\": \"SYSTEM\",\n        \"description\": \"You are using an unlicensed trial version for non-commercial use only of Dell EMC RecoverPoint for VMs.\",\n        \"id\": \"e9ed28dd44694412\",\n        \"severity\": \"WARNING\"\n    },\n    {\n        \"category\": \"RPA\",\n        \"description\": \"At least two virtual RPAs are running on same ESX. It is recommended to run only one virtual RPA on an ESX. Use vMotion to move extra RPAs to other ESXs. ; Tokyo\",\n        \"id\": \"d9bdb3d74691f67f\",\n        \"rpClusterId\": \"433dff4829580b89\",\n        \"rpClusterName\": \"Tokyo\",\n        \"severity\": \"WARNING\"\n    },\n    {\n        \"category\": \"SPLITTER\",\n        \"description\": \"Venice_HA1-dmbuo103.lss.emc.com's connection with RPA 1 is down\",\n        \"id\": \"e2c6a0248680feac\",\n        \"rpClusterId\": \"12560a07b180d47\",\n        \"rpClusterName\": \"Venice\",\n        \"severity\": \"ERROR\"\n    },\n    {\n        \"category\": \"SPLITTER\",\n        \"description\": \"Venice_HA1-dmbuo105.lss.emc.com's connection with RPA 2 is down\",\n        \"id\": \"502769b3c1ead933\",\n        \"rpClusterId\": \"12560a07b180d47\",\n        \"rpClusterName\": \"Venice\",\n        \"severity\": \"ERROR\"\n    },\n    {\n        \"category\": \"DEVICE\",\n        \"description\": \"User volume [cg_Win2k16_DB02, Prod, CG_RSET_Win2k16_DB02_1_0_scsi] cannot be accessed by: RPA 2\",\n        \"id\": \"d04c08aabfcf6298\",\n        \"rpClusterId\": \"12560a07b180d47\",\n        \"rpClusterName\": \"Venice\",\n        \"severity\": \"ERROR\"\n    },\n    {\n        \"category\": \"DEVICE\",\n        \"description\": \"User volume [cg_Win2k16_DB02, Prod, CG_RSET_Win2k16_DB02_0_0_scsi] cannot be accessed by: RPA 2\",\n        \"id\": \"e1a1ab66447abdc0\",\n        \"rpClusterId\": \"12560a07b180d47\",\n        \"rpClusterName\": \"Venice\",\n        \"severity\": \"ERROR\"\n    },\n    {\n        \"category\": \"CONSISTENCY_GROUP\",\n        \"description\": \"The vRPA RPA 2 and Protected VM/VMs (rp.Win2k16_PRD02.copy.shadow, rp.Win2k16_DB01.copy.shadow, rp.Ubuntu16_PRD01.copy.shadow) are running on the ESXi host Venice_HA1-dmbuo103.lss.emc.com. A VM, and the vRPA that is replicating that VM, should not run on the same ESXi host. If you have any such VM/vRPA pairs, it is recommended to use vMotion to move one of them to another ESXi host.\",\n        \"id\": \"14bbefd085839532\",\n        \"rpClusterId\": \"12560a07b180d47\",\n        \"rpClusterName\": \"Venice\",\n        \"severity\": \"WARNING\"\n    },\n    {\n        \"category\": \"CONSISTENCY_GROUP\",\n        \"description\": \"The vRPA RPA 2 and Protected VM/VMs (Win2k16_PRD02, Win2k16_DB01) are running on the ESXi host Tokyo_HA1-dmbuo153.lss.emc.com. A VM, and the vRPA that is replicating that VM, should not run on the same ESXi host. If you have any such VM/vRPA pairs, it is recommended to use vMotion to move one of them to another ESXi host.\",\n        \"id\": \"7eee310bc082b91f\",\n        \"rpClusterId\": \"433dff4829580b89\",\n        \"rpClusterName\": \"Tokyo\",\n        \"severity\": \"WARNING\"\n    },\n    {\n        \"category\": \"DEVICE\",\n        \"description\": \"User volume [cg_RHEL7_DB1, Prod, CG_RSET_RHEL7_DB1_0_0_scsi] cannot be accessed by: RPA 1\",\n        \"id\": \"cf522f2e55ddb662\",\n        \"rpClusterId\": \"12560a07b180d47\",\n        \"rpClusterName\": \"Venice\",\n        \"severity\": \"ERROR\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get vCenters",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/rp-clusters",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"rp-clusters"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get vCenters",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/vcs",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vcs"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Aug 2020 12:25:04 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "146"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"address\": \"10.0.210.205\",\n        \"id\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\n        \"isConnected\": true,\n        \"port\": 443,\n        \"userName\": \"Administrator@vsphere.local\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Register vCenter",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"address\": \"<string>\",\r\n    \"userName\": \"<string>\",\r\n    \"password\": \"<password>\",\r\n    \"certificate\": \"<string>\",\r\n    \"port\": 443\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/vcs",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"vcs"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Register vCenter  - Step 2",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"10.0.210.205\",\r\n    \"userName\": \"idan@vsphere.local\",\r\n    \"password\": \"Password123!\",\r\n    \"certificate\": \"-----BEGIN CERTIFICATE-----\\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\\n-----END CERTIFICATE-----\\n\",\r\n    \"port\": 443\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/vcs",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vcs"
+							]
+						}
+					},
+					"status": "CREATED",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Aug 2020 12:49:41 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "165"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"address\": \"10.0.210.205\",\n    \"id\": \"697bcf66-144d-4cae-930d-6364f96350ac\",\n    \"isConnected\": true,\n    \"port\": 443,\n    \"userName\": \"idan@vsphere.local\"\n}"
+				},
+				{
+					"name": "Register vCenter - Get Cert",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"10.0.210.205\",\r\n    \"userName\": \"idan@vsphere.local\",\r\n    \"password\": \"Password123!\",\r\n    \"port\": 443\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/vcs",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vcs"
+							]
+						}
+					},
+					"status": "BAD REQUEST",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Aug 2020 12:36:58 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2574"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": {\n        \"code\": \"99201\",\n        \"details\": [\n            {\n                \"message\": \"You must confirm the root CA certificate for vCenter Server '10.0.210.205:443' before you can register it.\"\n            },\n            {\n                \"code\": \"99201000\",\n                \"message\": \"-----BEGIN CERTIFICATE-----\\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\\n-----END CERTIFICATE-----\\n\",\n                \"target\": \"SSL connection failed. Add the following vCenter CA certificate to RPCenter and try again.\"\n            },\n            {\n                \"code\": \"99201005\",\n                \"message\": \"SHA1:78E430F2CE8FC8D6EC878009A4D83DCDBE2F0A29\"\n            },\n            {\n                \"code\": \"99201001\",\n                \"message\": \"CN=CA, DC=vsphere, DC=local, C=US, ST=California, O=IdanK_vCenter2.lab.dell.com, OU=VMware Engineering\"\n            },\n            {\n                \"code\": \"99201003\",\n                \"message\": \"Jan  2 00:15:47 2018 GMT\"\n            },\n            {\n                \"code\": \"99201002\",\n                \"message\": \"CN=CA, DC=vsphere, DC=local, C=US, ST=California, O=IdanK_vCenter2.lab.dell.com, OU=VMware Engineering\"\n            },\n            {\n                \"code\": \"99201004\",\n                \"message\": \"Dec 31 00:15:47 2027 GMT\"\n            }\n        ],\n        \"message\": \"Failed to connect to vCenter.\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Unregister vCenter",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/vcs/:vc-id",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"vcs",
+						":vc-id"
+					],
+					"variable": [
+						{
+							"key": "vc-id",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Unregister vCenter",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/vcs/:vc-id",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vcs",
+								":vc-id"
+							],
+							"variable": [
+								{
+									"key": "vc-id",
+									"value": "697bcf66-144d-4cae-930d-6364f96350ac"
+								}
+							]
+						}
+					},
+					"status": "NO CONTENT",
+					"code": 204,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Aug 2020 12:33:57 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Update vCenter",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"address\": \"string\",\r\n  \"certificate\": \"string\",\r\n  \"password\": \"string\",\r\n  \"port\": 443,\r\n  \"userName\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{pluginServer}}/api/v1/vcs/:vc-id",
+					"protocol": "https",
+					"host": [
+						"{{pluginServer}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"vcs",
+						":vc-id"
+					],
+					"variable": [
+						{
+							"key": "vc-id",
+							"value": "<string>"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update vCenter",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"idan@vsphere.local\",\r\n    \"password\": \"Password123!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{pluginServer}}/api/v1/vcs/:vc-id",
+							"protocol": "https",
+							"host": [
+								"{{pluginServer}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"vcs",
+								":vc-id"
+							],
+							"variable": [
+								{
+									"key": "vc-id",
+									"value": "697bcf66-144d-4cae-930d-6364f96350ac"
+								}
+							]
+						}
+					},
+					"status": "NO CONTENT",
+					"code": 204,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 25 Aug 2020 13:05:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "idan@vsphere.local",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "{{pwd}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "4545f597-514c-41f6-8f27-1aa53f883e2a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "164262e3-e333-4bd7-bc52-289db42f083d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "6726e79a-5542-4ac8-b817-c93827ad3183",
+			"key": "pwd",
+			"value": ""
+		},
+		{
+			"id": "263e7889-66b9-48de-b8c9-1e0b52a064d6",
+			"key": "pluginServer",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
