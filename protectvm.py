@@ -33,7 +33,7 @@ urllib3.disable_warnings()
 def get_args():
     # Get command line args from the user
     parser = argparse.ArgumentParser(
-        description='Script to perform ad-hoc VM backup in PowerProtect')
+        description='Script to automate VM protection in RP4VMs')
     parser.add_argument('-s', '--server', required=True,
                         action='store', help='RP4VMs Plugin Server DNS name or IP')
     parser.add_argument('-file', '--credsfile', required=True,
