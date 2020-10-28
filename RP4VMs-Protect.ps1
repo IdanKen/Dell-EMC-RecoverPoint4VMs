@@ -1,30 +1,31 @@
-﻿<#
+<#
 	.NOTES
 	===========================================================================
-	 Script name: RP4VMs-Protect.ps1
-	 Created on: 2020-10-27
-	 Author: Idan Kentor (@IdanKentor, idan.kentor@dell.com)
-	 Dependencies: None known
-	 ===Tested Against Environment====
-	 vSphere Version: 6.5, 6.7, 7.0
-	 PowerCLI Version: PowerCLI 12.0
-	 PowerShell Version: 7.0
-	 OS Version: Windows 10, Windows Server 2012, 2016 and 2019
-     RecoverPoint for VMs Version: 5.3
+	Script name: RP4VMs-Protect.ps1
+	Created on: 2020-10-27
+	Author: Idan Kentor (@IdanKentor, idan.kentor@dell.com)
+	Dependencies: None known
+	===Tested Against Environment====
+	vSphere Version: 6.5, 6.7, 7.0
+	PowerCLI Version: PowerCLI 12.0
+	PowerShell Version: 7.0
+	OS Version: Windows 10, Windows Server 2012, 2016 and 2019
+	RecoverPoint for VMs Version: 5.3
 	===========================================================================
 	.DESCRIPTION
-	Protects VMs using RecoverPoint for VMs for a given ESX cluster
-    .Example
-    $credentials = Get-Credential
+	Protects VMs using RecoverPoint for VMs for a given ESX cluster.
+	Facilitates auto-VM protection and tag-based protection.
+	.Example
+	$credentials = Get-Credential
 	.\RP4VMs-Protect.ps1 -vc vc.idan.lab -credentials $credentials -esxcluster Venice -pluginserver pluginserver.idan.lab -list $true
-    .Example
+	.Example
 	.\RP4VMs-Protect.ps1 -vc vc.idan.lab -credentials $credentials -esxcluster Venice -pluginserver pluginserver.idan.lab
-    .Example
+	.Example
 	.\RP4VMs-Protect.ps1 -vc vc.idan.lab -vcuser idan@vsphere.local -vcpassword MyPassword -esxcluster Venice -pluginserver pluginserver.idan.lab
-    .Example
-    .\RP4VMs-Protect.ps1 -vc vc.idan.lab -credentials $credentials -esxcluster Venice -pluginserver pluginserver.idan.lab -tag prod
-    .Example
-    .\RP4VMs-Protect.ps1 -vc vc.idan.lab -credentials $credentials -esxcluster Venice -pluginserver pluginserver.idan.lab -excludevms Win2k19
+	.Example
+	.\RP4VMs-Protect.ps1 -vc vc.idan.lab -credentials $credentials -esxcluster Venice -pluginserver pluginserver.idan.lab -tag prod
+	.Example
+	.\RP4VMs-Protect.ps1 -vc vc.idan.lab -credentials $credentials -esxcluster Venice -pluginserver pluginserver.idan.lab -excludevms Win2k19
 #>
 param(
     [Parameter(Mandatory = $true)]
