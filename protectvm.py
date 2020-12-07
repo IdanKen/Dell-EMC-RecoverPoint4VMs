@@ -8,10 +8,11 @@ import json
 import re
 import time
 
-# The purpose of this script is to facilitate VM Protection in RP4VMs
+# The purpose of this script is to facilitate backup/restore of settings in RP4VMs
 # The script exclusively uses the new RESTful API in RP4VMs 5.3
 # Author(s) - Idan Kentor <idan.kentor@dell.com>
 # Version 1 - August 2020
+# Version 2 - December 2020
 
 # Copyright [2020] [Idan Kentor]
 
@@ -33,7 +34,7 @@ urllib3.disable_warnings()
 def get_args():
     # Get command line args from the user
     parser = argparse.ArgumentParser(
-        description='Script to automate VM protection in RP4VMs')
+        description='Script to perform ad-hoc VM backup in PowerProtect')
     parser.add_argument('-s', '--server', required=True,
                         action='store', help='RP4VMs Plugin Server DNS name or IP')
     parser.add_argument('-file', '--credsfile', required=True,
@@ -43,6 +44,8 @@ def get_args():
     parser.add_argument('-n', '--name', required=('protect' in sys.argv),
                         action='store',
                         default=None, help='The name of the VM to protect')
+    parser.add_argument('-cl', '--rpvmcluster', required=False, action='store',
+                        default=None, help='Optionally specify the RP4VMs cluster to protect the VM')
     parser.add_argument('-nmonitor', '--no-monitor', required=False, action='store_true', dest='nmonitor',
                         default=False, help='Optionally prevents monitoring of protection process')
     args = parser.parse_args()
@@ -74,7 +77,7 @@ def get_creds(credsfile, uri):
             response.status_code, response.text))
     return user, password
 
-def get_candidates(uri, user, password, name):
+def get_candidates(uri, user, password, name, rpvmcluster):
     # Gets candidate VMs for replication
     suffixurl = "/vms/protect/candidates"
     uri += suffixurl
@@ -105,20 +108,31 @@ def get_candidates(uri, user, password, name):
             raise Exception('Failed to query {}, code: {}, body: {}'.format(
 			        uri, response.status_code, response.text))
         for vm in response.json():
-            if re.match(name.lower(),vm['name'].lower()):
+            if re.match(name.lower(), vm['name'].lower()):
                 vms.append(vm)
     if vms:
-        return vms
-    return exactresult
+        return check_rpvmcluster(vms, rpvmcluster)
+    return check_rpvmcluster(exactresult, rpvmcluster)
 
-def get_defaults(uri, user, password, vmname, rpclustername):
+def check_rpvmcluster(vmlist, rpvmcluster):
+    # Check if a VM can be protected by a specific RP4VMs cluster
+    if rpvmcluster is None:
+        return vmlist
+    else:
+        vms = []
+        for vm in vmlist:
+             if re.match(rpvmcluster.lower(), vm['rpClusterName'].lower()):
+                 vms.append(vm)
+    return vms
+
+def get_defaults(uri, user, password, vmname, rpvmcluster):
     # Gets recommended replication parameters
     suffixurl = "/vms/protect/defaults"
     uri += suffixurl
     headers = {'Content-Type': 'application/json'}
     payload = json.dumps({
         'vm' : '{}'.format(vmname),
-	    'rpCluster' : '{}'.format(rpclustername)
+	    'rpCluster' : '{}'.format(rpvmcluster)
 	    })
     try:
         response = requests.post(uri, headers=headers, data=payload, auth=(user, password), verify=False)
@@ -175,13 +189,14 @@ def monitor_activity(uri, user, password, transactionid):
 def main():
     apiendpoint = "/api/v1"
     args = get_args()
-    server, credsfile, name, action, nmonitor = args.server, args.credsfile, args.name, args.action, args.nmonitor
+    server, credsfile, name = args.server, args.credsfile, args.name
+    action, nmonitor, rpvmcluster = args.action, args.nmonitor, args.rpvmcluster
     uri = "https://{}{}".format(server, apiendpoint)
     user, password = get_creds(credsfile, uri)
     print("\n")
     print("-> Credentials check successful\n")
     print("-> Getting VM candidates\n")
-    vms = get_candidates(uri, user, password, name)
+    vms = get_candidates(uri, user, password, name, rpvmcluster)
     if len(vms) == 0:
             print('VM could not be found')
     if (action == 'list'):
@@ -189,10 +204,10 @@ def main():
             print("---------------------------------------------------------")
             print("VM ID:", vm["id"])
             print("VM Name:", vm["name"])
-            print("vCenter Name", vm["vcName"])
-            print("vCenter ID", vm["vcId"])
-            print("RP4VMs Cluster Name", vm["rpClusterName"])
-            print("RP4VMs Cluster ID", vm["rpClusterId"])
+            print("vCenter Name:", vm["vcName"])
+            print("vCenter ID:", vm["vcId"])
+            print("RP4VMs Cluster Name:", vm["rpClusterName"])
+            print("RP4VMs Cluster ID:", vm["rpClusterId"])
             print()
     elif (len(vms) > 1):
         print ("VM Name {} yielded in more than 1 result".format(name))
