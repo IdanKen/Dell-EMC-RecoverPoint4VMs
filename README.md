@@ -8,6 +8,7 @@ This repository is dedicated for automation of flows in Dell EMC RecoverPoint fo
 - RecoverPoint for VMs 5.3.x - New RESTful API
 ## Prerequisites ##
 - Python 3.x
+- PowerShell 7.x
 ## Documentation ##
 - See the help page of each script (i.e protectvm.py -h)
 - RecoverPoint for VMs REST API - online documentation - [Dell Technologies API Explorer](https://developer.dellemc.com)
