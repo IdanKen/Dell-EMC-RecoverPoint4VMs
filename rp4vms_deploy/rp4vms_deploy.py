@@ -15,6 +15,7 @@ import urllib3
 # The purpose of this script is to automate RP4VMs deployment
 # Author - Idan Kentor <idan.kentor@dell.com>
 # Version 1 - September 2022
+# Version 2 - November 2022
 
 # Copyright [2022] [Idan Kentor]
 
@@ -40,7 +41,7 @@ def get_args():
                         action='store', help='Full path to the JSON config file')
     parser.add_argument('-pluginserver', '--config-plugin-server', required=False, action='store_true',
                         dest='pluginserver', default=True, help='Optionally prevents Plugin Server configuration')
-    parser.add_argument('-connect', '--connect-another-cluster', required=False, action='store_true',
+    parser.add_argument('-connect', '--connect-another-cluster', required=False, action='store_false',
                         dest='connect', default=True, help='Optionally prevents connection to a different cluster')
     args = parser.parse_args()
     return args
@@ -100,7 +101,7 @@ def compute_nic_role(config):
             print("\033[91m\033[1m->Incorrect number of vRPA data IPs")
             sys.exit(1)
         config["nicRoleMtu"] = {"WAN_LAN": config["mgmtMTU"], "DATA": config["dataMTU"]}
-        config["nicRoleVlan"] = {"WAN_LAN": config["mgmtNetwork"]}
+        config["nicRoleVlan"] = {"WAN_LAN": config["mgmtNetwork"], "DATA": config["dataNetwork"]}
         for counter in range(config["vRPACount"]):
             NicRoleTag = {}
             ipInfoList = {}
@@ -114,7 +115,6 @@ def compute_nic_role(config):
             dataIpInfoList["ipAddress"] = {"ip": config["vRPADataIPs"][counter], "netmask": config["dataSubnet"]}
             NicRoleTag["DATA"] = {"ipInfoList": [dataIpInfoList]}
             config["nicRole"].append(NicRoleTag)
-        sys.exit(0)
     elif config["networkTopology"] == "WAN_IS_SEPARATED":
         if not config["wanNetwork"]:
             print("\033[91m\033[1m->WAN Network Port Group must be specified")
@@ -137,7 +137,7 @@ def compute_nic_role(config):
             wanIpInfoList["ipAddress"] = {"ip": config["vRPAWANIPs"][counter], "netmask": config["wanSubnet"]}
             NicRoleTag["WAN"] = {"ipInfoList": [wanIpInfoList]}
             config["nicRole"].append(NicRoleTag)
-    elif config["networkTopology"] == "ALL_IS_SEPARATED":
+    elif config["networkTopology"] == "ALL_ARE_SEPARATED":
         if not config["wanNetwork"] or not config["dataNetwork"]:
             print("\033[91m\033[1m->WAN and Data Network Port Groups must be specified")
             sys.exit(1)
@@ -179,6 +179,7 @@ def compute_nic_role(config):
 
 def create_ovftool_command(config):
     # Forms the required ovftool commands
+    print()
     ovfexecrpc = '{} --noDestinationSSLVerify --skipManifestCheck --acceptAllEulas --powerOn --name="{}" '.format(config["ovfToolLocation"], config["pluginServerName"])
     ovfexecrpc += '--diskMode=thin --datastore={} --net:"Plugin Server Management Network"="{}" '.format(config["repoDatastore"], config["mgmtNetwork"])
     ovfexecrpc += '--prop:vami.ip0.brs={} --prop:vami.netmask0.brs="{}" --prop:vami.gateway.brs="{}" '.format(config["pluginServerIP"], config["mgmtSubnet"], config["mgmtGateway"])
@@ -237,6 +238,7 @@ def init_rest_call(callType, uri, token, payload=None, params=None, deploy=None)
     if not response.content:
         return True
     else:
+        #print(response.json())
         return response.json()
 
 def monitor_deploy_activity(transaction, uri, token, deploy=None, adminPwd=None, connect=None):
@@ -398,35 +400,67 @@ def config_repo(config, uri, token, vcCreds):
     print("\031[94m\033[1m-> Repository DS could not be found")
     sys.exit(1)
 
+def match_network_pgs(networkType, networkPg, commonPg):
+    if networkPg in commonPg:
+        return networkPg
+    else:
+        counter = 0
+        for portGroup in commonPg:
+            if networkPg in portGroup:
+                counter += 1
+                matchedPortGroup = portGroup
+        if counter == 1:
+            return matchedPortGroup
+        elif counter > 1:
+            print("\031[94m\033[1m-> Multiple {} networks detected, use exact name".format(networkType))
+            print("\031[94m\033[1m-> Use the following convention: 'PG (vDS)'")
+            sys.exit(1)
+        else:
+            return False
+
 def validate_network_pgs(config, uri, token, vcCreds):
     # Validates network port groups
     commonPgUri = '{}/operations/common_vlan_names'.format(uri)
     payload = {"vmUids": config["vRPAUuid"], "arrayCreds": vcCreds}
     commonPg = init_rest_call("POST", commonPgUri, token, payload)
-    if config["mgmtNetwork"] not in commonPg:
+    matchedPortGroup = match_network_pgs("MGMT", config["mgmtNetwork"], commonPg)
+    if matchedPortGroup:
+        config["mgmtNetwork"] = matchedPortGroup
+        print("-> Mgmt Network detected")
+    else:
         print("\031[94m\033[1m-> Mgmt Network could not be found")
         sys.exit(1)
-    if config["networkTopology"] == "ALL_IN_ONE":
-        if config["mgmtNetwork"] in commonPg:
-            print("-> Mgmt Network detected")
-            return True
-        else:
-            print("\031[94m\033[1m-> Mgmt Network could not be found")
-            sys.exit(1)
-    elif config["networkTopology"] == "DATA_IS_SEPARATED":
-        if config["dataNetwork"] in commonPg:
+    if config["networkTopology"] == "DATA_IS_SEPARATED":
+        matchedPortGroup = match_network_pgs("Data", config["dataNetwork"], commonPg)
+        if matchedPortGroup:
+            config["dataNetwork"] = matchedPortGroup
             print("-> Data Network detected")
-            return True
+        else:
+            print("\031[94m\033[1m-> Data Network could not be found")
+            sys.exit(1)
     elif config["networkTopology"] == "WAN_IS_SEPARATED":
-        if config["wanNetwork"] in commonPg:
+        matchedPortGroup = match_network_pgs("WAN", config["wanNetwork"], commonPg)
+        if matchedPortGroup:
+            config["wanNetwork"] = matchedPortGroup
             print("-> WAN Network detected")
-            return True
-    elif config["networkTopology"] == "ALL_IS_SEPARATED":
-        if config["wanNetwork"] in commonPg and config["dataNetwork"] in commonPg:
-            print("-> WAN and Data Networks detected")
-            return True
-    print("\031[94m\033[1m-> Networks could not be found")
-    sys.exit(1)
+        else:
+            print("\031[94m\033[1m-> WAN Network could not be found")
+            sys.exit(1)
+    elif config["networkTopology"] == "ALL_ARE_SEPARATED":
+        matchedPortGroup = match_network_pgs("WAN", config["wanNetwork"], commonPg)
+        if matchedPortGroup:
+            config["wanNetwork"] = matchedPortGroup
+        else:
+            print("\031[94m\033[1m-> WAN Network could not be found")
+            sys.exit(1)
+        matchedPortGroup = match_network_pgs("Data", config["dataNetwork"], commonPg)
+        if matchedPortGroup:
+            config["dataNetwork"] = matchedPortGroup
+        else:
+            print("\031[94m\033[1m-> Data Network could not be found")
+            sys.exit(1)
+        print("-> WAN and Data Networks detected")
+    return config
 
 def build_deploy_config(config, vcCreds):
     # Build cluster deployment data structure
@@ -513,7 +547,7 @@ def check_connectivity(ipAddress):
         if (time.time() - start) > timeout:
             ack = False
             break
-        result=subprocess.run(pingCmd, stdout=subprocess.PIPE)
+        result=subprocess.run(pingCmd, shell=True, stdout=subprocess.PIPE)
         if result.returncode == 0:
             ack = True
             break
@@ -603,7 +637,7 @@ def main():
     config = config_vrpas(config, uri, token, vcCreds)
     config = compute_nic_role(config)
     config = config_repo(config, uri, token, vcCreds)
-    validate_network_pgs(config, uri, token, vcCreds)
+    config = validate_network_pgs(config, uri, token, vcCreds)
 
     # Builds Deployment data structure
     print("-> Building deployment configuration")
@@ -642,6 +676,7 @@ def main():
         # Makes sure that the IP of the other cluster has been specified in the config file
         if not config["partnerClusterVRpaClusterIP"]:
             print('\033[91m\033[1m-> Missing peer cluster IP')
+            sys.exit(1)
         # Checks connectivity to the peer cluster mgmt IP
         if not check_connectivity(config["partnerClusterVRpaClusterIP"]):
             print("\033[91m\033[1m---> Peer cluster IP is unreachable")
