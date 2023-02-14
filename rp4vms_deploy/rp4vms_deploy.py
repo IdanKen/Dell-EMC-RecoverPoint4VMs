@@ -16,8 +16,9 @@ import urllib3
 # Author - Idan Kentor <idan.kentor@dell.com>
 # Version 1 - September 2022
 # Version 2 - November 2022
+# Version 3 - February 2023
 
-# Copyright [2022] [Idan Kentor]
+# Copyright [2023] [Idan Kentor]
 
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -39,7 +40,7 @@ def get_args():
         description='Script to automate RP4VMs deployment')
     parser.add_argument('-configfile', '--config-file', required=True, dest='configfile',
                         action='store', help='Full path to the JSON config file')
-    parser.add_argument('-pluginserver', '--config-plugin-server', required=False, action='store_true',
+    parser.add_argument('-pluginserver', '--config-plugin-server', required=False, action='store_false',
                         dest='pluginserver', default=True, help='Optionally prevents Plugin Server configuration')
     parser.add_argument('-connect', '--connect-another-cluster', required=False, action='store_false',
                         dest='connect', default=True, help='Optionally prevents connection to a different cluster')
@@ -49,7 +50,12 @@ def get_args():
 def read_config(configfile):
     # Reads config file, validate params and assigns to config dictionary
     with open(configfile, 'r') as fileHandle:
-        config = json.load(fileHandle)
+        try:
+            config = json.load(fileHandle)
+        except json.decoder.JSONDecodeError:
+            print("\033[91m\033[1m->Cannot parse JSON config file")
+            sys.exit(1)
+    fileHandle.close()
     for key in list(config.keys()):
       if key.startswith('_comment'):
             config.pop(key)
@@ -238,7 +244,6 @@ def init_rest_call(callType, uri, token, payload=None, params=None, deploy=None)
     if not response.content:
         return True
     else:
-        #print(response.json())
         return response.json()
 
 def monitor_deploy_activity(transaction, uri, token, deploy=None, adminPwd=None, connect=None):
@@ -595,15 +600,29 @@ def main():
      # Const definition
     apiEndpoint = "/deployer/rest/5_2"
     username, password = "admin", "admin"
-    config["splitterType"] = ["VSCSI"]
     config["wanEncryption"] = "ENCRYPT"
     clusterWaitTimeout = 120
 
+    # Detect splitter type. IOF is valid on RPVM 6.0 and later
+    print("\033[m")
+    try:
+        if not config["splitterType"]:
+            config["splitterType"] = ["VSCSI"]
+        elif config["splitterType"] == "VSCSI":
+            config["splitterType"] = ["VSCSI"]
+        elif config["splitterType"] == "IOF":
+            config["splitterType"] = ["IOF"]
+        else:
+            print('\033[91m\033[1m-> Wrong splitterType - either VSCSI or IOF')
+            sys.exit(1)
+    except KeyError:
+        config["splitterType"] = ["VSCSI"]
+   
     # Creates the ovftool commands for Plugin Server and vRPAs
     ovfexecrpc, ovfexecvrpa = create_ovftool_command(config)
-    print("-> Provisioning Plugin Server from OVA")
     # Executes Plugin Server OVA Deployment (configuration enabled by default)
     if configPluginServer:
+        print("\033[m-> Provisioning Plugin Server from OVA")
         if not config["pluginServerIP"] or not config["pluginServerFQDN"]:
             print('\033[91m\033[1m-> Missing Plugin Server details')
             sys.exit(1)
