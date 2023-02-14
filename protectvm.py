@@ -8,7 +8,7 @@ import json
 import re
 import time
 
-# The purpose of this script is to facilitate backup/restore of settings in RP4VMs
+# The purpose of this script is to facilitate VM Protection in RP4VMs
 # The script exclusively uses the new RESTful API in RP4VMs 5.3
 # Author(s) - Idan Kentor <idan.kentor@dell.com>
 # Version 1 - August 2020
