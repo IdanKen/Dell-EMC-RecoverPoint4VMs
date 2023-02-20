@@ -16,7 +16,8 @@ import urllib3
 # Author - Idan Kentor <idan.kentor@dell.com>
 # Version 1 - September 2022
 # Version 2 - November 2022
-# Version 3 - February 2023
+# Version 3 - January 2023
+# Version 4 - February 2023
 
 # Copyright [2023] [Idan Kentor]
 
@@ -52,22 +53,32 @@ def read_config(configfile):
     with open(configfile, 'r') as fileHandle:
         try:
             config = json.load(fileHandle)
-        except json.decoder.JSONDecodeError:
-            print("\033[91m\033[1m->Cannot parse JSON config file")
+        except json.decoder.JSONDecodeError as error:
+            print("\033[91m\033[1m->Cannot parse JSON config file:\033[0m", {error})
             sys.exit(1)
     fileHandle.close()
     for key in list(config.keys()):
       if key.startswith('_comment'):
             config.pop(key)
     if 1 > config["vRPACount"] > 8 :
-        print("\033[91m\033[1m->Illegal vRPA count - a vRPA cluster must have at least one vRPA and up to 8 vRPAs")
+        print("\033[91m\033[1m->Illegal vRPA count - a vRPA cluster must have at least one vRPA and up to 8 vRPAs\033[0m")
         sys.exit(1)
     config["vRPANames"] = []
     for counter in range(config["vRPACount"]):
         config["vRPANames"].append('{}_vRPA{}'.format(config["vRPAClusterName"], counter+1))
     config["pluginServerName"] = '{}_Plugin-Server'.format(config["vRPAClusterName"])
+    try:
+        if (not config["pluginServerSubnet"]):
+            config["pluginServerSubnet"] = config["mgmtSubnet"]
+        if (not config["pluginServerGateway"]):
+            config["pluginServerGateway"] = config["mgmtGateway"]
+    except KeyError:
+            config["pluginServerSubnet"] = config["mgmtSubnet"]
+            config["pluginServerGateway"] = config["mgmtGateway"]
+    if (not config["vRPADatastore"]):
+        config["vRPADatastore"] = config["repoDatastore"]
     if (not config["repoDatastore"] and not config["vRPADatastore"]):
-        print("\033[91m\033[1m->No Datastore provided, specify DS for repository and/or vRPAs")
+        print("\033[91m\033[1m->No Datastore provided, specify DS for repository and/or vRPAs\033[0m")
         sys.exit(1)
     if (not config["vRPADatastore"]):
         config["vRPADatastore"] = config["repoDatastore"]
@@ -101,10 +112,10 @@ def compute_nic_role(config):
     config["nicRole"] = []
     if config["networkTopology"] == "DATA_IS_SEPARATED":
         if not config["dataNetwork"]:
-            print("\033[91m\033[1m->Data Network Port Group must be specified")
+            print("\033[91m\033[1m->Data Network Port Group must be specified\033[0m")
             sys.exit(1)
         elif len(config["vRPADataIPs"]) != config["vRPACount"]:
-            print("\033[91m\033[1m->Incorrect number of vRPA data IPs")
+            print("\033[91m\033[1m->Incorrect number of vRPA data IPs\033[0m")
             sys.exit(1)
         config["nicRoleMtu"] = {"WAN_LAN": config["mgmtMTU"], "DATA": config["dataMTU"]}
         config["nicRoleVlan"] = {"WAN_LAN": config["mgmtNetwork"], "DATA": config["dataNetwork"]}
@@ -123,10 +134,10 @@ def compute_nic_role(config):
             config["nicRole"].append(NicRoleTag)
     elif config["networkTopology"] == "WAN_IS_SEPARATED":
         if not config["wanNetwork"]:
-            print("\033[91m\033[1m->WAN Network Port Group must be specified")
+            print("\033[91m\033[1m->WAN Network Port Group must be specified\033[0m")
             sys.exit(1)
         elif len(config["vRPAWANIPs"]) != config["vRPACount"]:
-            print("\033[91m\033[1m->incorrect number of vRPA WAN IPs")
+            print("\033[91m\033[1m->incorrect number of vRPA WAN IPs\033[0m")
             sys.exit(1)
         config["nicRoleMtu"] = {"LAN_DATA": int(config["mgmtMTU"]), "WAN": int(config["wanMTU"])}
         config["nicRoleVlan"] = {"LAN_DATA": config["mgmtNetwork"], "WAN": config["wanNetwork"]}
@@ -145,10 +156,10 @@ def compute_nic_role(config):
             config["nicRole"].append(NicRoleTag)
     elif config["networkTopology"] == "ALL_ARE_SEPARATED":
         if not config["wanNetwork"] or not config["dataNetwork"]:
-            print("\033[91m\033[1m->WAN and Data Network Port Groups must be specified")
+            print("\033[91m\033[1m->WAN and Data Network Port Groups must be specified\033[39m")
             sys.exit(1)
         elif config["vRPACount"] != len(config["vRPAWANIPs"]) or config["vRPACount"] != len(config["vRPADataIPs"]):
-            print("\033[91m\033[1m->incorrect number of vRPA WAN and/or Data IPs")
+            print("\033[91m\033[1m->incorrect number of vRPA WAN and/or Data IPs\033[39m")
             sys.exit(1)
         config["nicRoleMtu"] = {"WAN": int(config["wanMTU"]), "LAN": int(config["mgmtMTU"]), "DATA": int(config["dataMTU"])}
         config["nicRoleVlan"] = {"WAN": config["wanNetwork"], "LAN": config["mgmtNetwork"], "DATA": config["dataNetwork"]}
@@ -179,7 +190,7 @@ def compute_nic_role(config):
             NicRoleTag["WAN_LAN_DATA"] = {"ipInfoList": [ipInfoList]}
             config["nicRole"].append(NicRoleTag)
     else:
-        print("\033[91m\033[1m->Illegal network topology")
+        print("\033[91m\033[1m->Illegal network topology\033[39m")
         sys.exit(1)
     return config
 
@@ -188,7 +199,7 @@ def create_ovftool_command(config):
     print()
     ovfexecrpc = '{} --noDestinationSSLVerify --skipManifestCheck --acceptAllEulas --powerOn --name="{}" '.format(config["ovfToolLocation"], config["pluginServerName"])
     ovfexecrpc += '--diskMode=thin --datastore={} --net:"Plugin Server Management Network"="{}" '.format(config["repoDatastore"], config["mgmtNetwork"])
-    ovfexecrpc += '--prop:vami.ip0.brs={} --prop:vami.netmask0.brs="{}" --prop:vami.gateway.brs="{}" '.format(config["pluginServerIP"], config["mgmtSubnet"], config["mgmtGateway"])
+    ovfexecrpc += '--prop:vami.ip0.brs={} --prop:vami.netmask0.brs="{}" --prop:vami.gateway.brs="{}" '.format(config["pluginServerIP"], config["pluginServerSubnet"], config["pluginServerGateway"])
     ovfexecrpc += '--prop:vami.DNS.brs="{}" --prop:vami.fqdn.brs="{}" --prop:vami.ntp_servers.brs="{}" --allowExtraConfig '.format(" ".join(config["DNSServers"]), config["pluginServerFQDN"], " ".join(config["NTPServers"]))
     ovfexecrpc += '--extraConfig:RecoverPoint.PluginServer="RPC" "{}" vi://"{}":"{}"@{}/{}/host/{}/'.format(config["pluginServerOVALocation"], config["vcUser"], config["vcPassword"], config["vcIP"], config["datacenter"], config["esxCluster"])
     ovfexecvrpa = []
@@ -204,9 +215,9 @@ def exec_ova_provisioning(ovfexec):
     # Executes ovftool commands
     exitCode = os.system(ovfexec)
     if (exitCode == 0):
-        print("\033[92m\033[1m ---> OVA deployment completed successfully\033[m")
+        print("\033[92m\033[1m ---> OVA deployment completed successfully\033[0m")
     else:
-        print("\033[91m\033[1m ---> OVA deployment failed")
+        print("\033[91m\033[1m ---> OVA deployment failed\033[0m")
         sys.exit(1)
 
 def init_rest_call(callType, uri, token, payload=None, params=None, deploy=None):
@@ -230,17 +241,17 @@ def init_rest_call(callType, uri, token, payload=None, params=None, deploy=None)
     except requests.exceptions.ConnectionError as err:
         if deploy:
             return False
-        print('\033[91m\033[1m->Error Connecting to {}: {}'.format(uri, err))
+        print('\033[91m\033[1m->Error Connecting to {}: {}\033[39m'.format(uri, err))
         sys.exit(1)
     except requests.exceptions.Timeout as err:
-        print('\033[91m\033[1m->Connection timed out {}: {}'.format(urllib3, err))
+        print('\033[91m\033[1m->Connection timed out {}: {}\033[39m'.format(urllib3, err))
         sys.exit(1)
     except requests.exceptions.RequestException as err:
         if deploy and response.status_code == 401:
             return False
-        print("\033[91m\033[1m->The call {} {} failed with exception:{}".format(response.request.method, response.url, err))
+        print("\033[91m\033[1m->The call {} {} failed with exception:{}\033[39m".format(response.request.method, response.url, err))
     if (response.status_code not in code):
-        raise Exception('\033[91m\033[1m->Failed to query {}, code: {}, body: {}'.format(uri, response.status_code, response.text))
+        raise Exception('\033[91m\033[1m->Failed to query {}, code: {}, body: {}\033[39m'.format(uri, response.status_code, response.text))
     if not response.content:
         return True
     else:
@@ -278,7 +289,7 @@ def monitor_deploy_activity(transaction, uri, token, deploy=None, adminPwd=None,
             response = init_rest_call("GET", monitorUri, token)
             return response
         elif response['state'] == 'ERROR':
-            print("\033[91m\033[1m->Action failed:", json.dumps(response))
+            print("\033[91m\033[1m->Action failed:\033[39m", json.dumps(response))
             break
         print('---> Transaction {} {} {}%'.format(transaction, response['state'], response['progress']))
         time.sleep(interval)
@@ -310,12 +321,12 @@ def validate_virtual_env(config, uri, token):
     transaction = init_rest_call("POST", vcUri, token, payload)
     result = monitor_deploy_activity(transaction["id"], uri, token)
     if result[0]["severity"] == "SUCCESS":
-        print("\033[92m\033[1m---> Pre-installation validation passed successfully\033[m")
+        print("\033[92m\033[1m---> Pre-installation validation passed successfully\033[0m")
     elif result[0]["severity"] == "WARNING":
-        print("\033[93m\033[1m---> Warnings detected in pre-installation validation")
+        print("\033[93m\033[1m---> Warnings detected in pre-installation validation\033[39m")
         print(result[0]["message"])
     else:
-        print("\033[91m\033[1m---> Errors detected in pre-installation validation")
+        print("\033[91m\033[1m---> Errors detected in pre-installation validation\033[39m")
         print(result[0]["message"])
         sys.exit(1)
     return vcCreds
@@ -371,7 +382,7 @@ def config_vrpas(config, uri, token, vcCreds):
             availRPAs["availableVrpas"][counter] = vrpaInfoTemp
             config["vRPAUuid"].append(availRPAs["availableVrpas"][vrpaPos]["vmUuid"])
     elif len(availRPAs["availableVrpas"]) < config["vRPACount"]:
-        print("\031[91m\033[1m---> Could not detect sufficient number of available vRPAs")
+        print("\031[91m\033[1m---> Could not detect sufficient number of available vRPAs\033[39m")
         sys.exit(1)
     else:
         vrpaNameMatch = 0
@@ -386,7 +397,7 @@ def config_vrpas(config, uri, token, vcCreds):
                     availRPAs["availableVrpas"][counter] = vrpaInfoTemp
                     config["vRPAUuid"].append(availRPAs["availableVrpas"][vrpaPos]["vmUuid"])
         if vrpaNameMatch != config["vRPACount"]:
-            print("\033[91m\033[1m---> Could not detect sufficient number of available vRPAs")
+            print("\033[91m\033[1m---> Could not detect sufficient number of available vRPAs\033[39m")
             sys.exit(1)
     config["vRPAInfo"] = availRPAs["availableVrpas"]
     return config
@@ -402,7 +413,7 @@ def config_repo(config, uri, token, vcCreds):
             print("-> DS for Repository Volume detected")
             config["repoUid"] = ds["uid"]
             return config
-    print("\031[94m\033[1m-> Repository DS could not be found")
+    print("\031[94m\033[1m-> Repository DS could not be found\033[39m")
     sys.exit(1)
 
 def match_network_pgs(networkType, networkPg, commonPg):
@@ -417,8 +428,8 @@ def match_network_pgs(networkType, networkPg, commonPg):
         if counter == 1:
             return matchedPortGroup
         elif counter > 1:
-            print("\031[94m\033[1m-> Multiple {} networks detected, use exact name".format(networkType))
-            print("\031[94m\033[1m-> Use the following convention: 'PG (vDS)'")
+            print("\031[94m\033[1m-> Multiple {} networks detected, use exact name\033[39m".format(networkType))
+            print("\031[94m\033[1m-> Use the following convention: 'PG (vDS)'\033[39m")
             sys.exit(1)
         else:
             return False
@@ -433,7 +444,7 @@ def validate_network_pgs(config, uri, token, vcCreds):
         config["mgmtNetwork"] = matchedPortGroup
         print("-> Mgmt Network detected")
     else:
-        print("\031[94m\033[1m-> Mgmt Network could not be found")
+        print("\031[94m\033[1m-> Mgmt Network could not be found\033[39m")
         sys.exit(1)
     if config["networkTopology"] == "DATA_IS_SEPARATED":
         matchedPortGroup = match_network_pgs("Data", config["dataNetwork"], commonPg)
@@ -441,7 +452,7 @@ def validate_network_pgs(config, uri, token, vcCreds):
             config["dataNetwork"] = matchedPortGroup
             print("-> Data Network detected")
         else:
-            print("\031[94m\033[1m-> Data Network could not be found")
+            print("\031[94m\033[1m-> Data Network could not be found\033[39m")
             sys.exit(1)
     elif config["networkTopology"] == "WAN_IS_SEPARATED":
         matchedPortGroup = match_network_pgs("WAN", config["wanNetwork"], commonPg)
@@ -462,7 +473,7 @@ def validate_network_pgs(config, uri, token, vcCreds):
         if matchedPortGroup:
             config["dataNetwork"] = matchedPortGroup
         else:
-            print("\031[94m\033[1m-> Data Network could not be found")
+            print("\031[94m\033[1m-> Data Network could not be found\033[39m")
             sys.exit(1)
         print("-> WAN and Data Networks detected")
     return config
@@ -520,9 +531,9 @@ def bootstrap_cluster(config, uri, token, deployConfig):
     transaction = init_rest_call("POST", bootstrapUri, token, deployConfig, queryParams)
     result = monitor_deploy_activity(transaction["id"], uri, token, True, config["vRPAAdminPwd"])
     if result:
-        print("\033[92m\033[1m-> Cluster deployed successfully\033[m")
+        print("\033[92m\033[1m-> Cluster deployed successfully\033[0m")
     else:
-        print("\033[91m\033[1m-> Cluster deployment failed")
+        print("\033[91m\033[1m-> Cluster deployment failed\033[39m")
         print(result[0]["message"])
         sys.exit(1)
     return True
@@ -535,7 +546,7 @@ def configure_plugin_server(config, uri, token):
     registerPluginUri = '{}/clusters/current/register_cluster_vc_to_rp_center'.format(uri)
     payload = {"rpCenterIp": config["pluginServerIP"]}
     init_rest_call("POST", registerPluginUri, token, payload)
-    print("\033[92m\033[1m-> Plugin Server configured successfully\033[m")
+    print("\033[92m\033[1m-> Plugin Server configured successfully\033[0m")
     return True
 
 def check_connectivity(ipAddress):
@@ -571,21 +582,21 @@ def connect_clusters(config, uri, token):
     transaction = init_rest_call("POST", validateUri, token, payload)
     result = monitor_deploy_activity(transaction["id"], uri, token)
     if result[1]["severity"] == "SUCCESS":
-        print("\033[92m\033[1m---> Connectivity checks to peer cluster completed successfully\033[m")
+        print("\033[92m\033[1m---> Connectivity checks to peer cluster completed successfully\033[0m")
     else:
-        print("\033[91m\033[1m---> Connectivity issues to peer cluster detected")
+        print("\033[91m\033[1m---> Connectivity issues to peer cluster detected\033[39m")
         sys.exit(1)
     print("-> Connecting clusters")
     connectUri = '{}/clusters/current/links/ip'.format(uri)
     transaction = init_rest_call("POST", connectUri, token, payload)
     result = monitor_deploy_activity(transaction["id"], uri, token, None, None, True)
     if result["state"] == "SUCCESS":
-        print("\033[92m\033[1m---> Clusters Connect completed successfully\033[m")
+        print("\033[92m\033[1m---> Clusters Connect completed successfully\033[0m")
     elif result["state"] == "WARNING":
-        print("\033[93m\033[1m---> Warnings detected in the Cluster connection Process")
+        print("\033[93m\033[1m---> Warnings detected in the Cluster connection Process\033[39m")
         print(result["message"])
     else:
-        print("\033[91m\033[1m---> Errors detected in the cluster connection process")
+        print("\033[91m\033[1m---> Errors detected in the cluster connection process\033[39m")
         print(result[0]["message"])
         sys.exit(1)
 
@@ -604,7 +615,6 @@ def main():
     clusterWaitTimeout = 120
 
     # Detect splitter type. IOF is valid on RPVM 6.0 and later
-    print("\033[m")
     try:
         if not config["splitterType"]:
             config["splitterType"] = ["VSCSI"]
@@ -613,7 +623,7 @@ def main():
         elif config["splitterType"] == "IOF":
             config["splitterType"] = ["IOF"]
         else:
-            print('\033[91m\033[1m-> Wrong splitterType - either VSCSI or IOF')
+            print('\033[91m\033[1m-> Wrong splitterType - either VSCSI or IOF\033[0m')
             sys.exit(1)
     except KeyError:
         config["splitterType"] = ["VSCSI"]
@@ -622,14 +632,14 @@ def main():
     ovfexecrpc, ovfexecvrpa = create_ovftool_command(config)
     # Executes Plugin Server OVA Deployment (configuration enabled by default)
     if configPluginServer:
-        print("\033[m-> Provisioning Plugin Server from OVA")
+        print("-> Provisioning Plugin Server from OVA")
         if not config["pluginServerIP"] or not config["pluginServerFQDN"]:
-            print('\033[91m\033[1m-> Missing Plugin Server details')
+            print('\033[91m\033[1m-> Missing Plugin Server details\033[0m')
             sys.exit(1)
         exec_ova_provisioning(ovfexecrpc)
     # Executes vRPA OVA Deployment
     for counter in range(config["vRPACount"]):
-        print('-> Provisioning vRPA{} from OVA'.format(counter+1))
+        print('-> Provisioning vRPA{} from OVA\033[0m'.format(counter+1))
         exec_ova_provisioning(ovfexecvrpa[counter])
 
     # Checking connectivity to vRPA Mgmt IPs
@@ -639,7 +649,7 @@ def main():
             print("\033[91m\033[1m ---> vRPA MGMT IP {} is unreachable".format(vRPAMgmtIP))
         else:
             print("---> vRPA Mgmt IP {} is reachable".format(vRPAMgmtIP))
-    print('\033[92m\033[1m---> All vRPAs are reachable\033[m')
+    print('\033[92m\033[1m---> All vRPAs are reachable\033[0m')
 
     # Logs into the RP4VMs Deployment API
     uri = "https://{}{}".format(config["vRPAMgmtIPs"][0], apiEndpoint)
@@ -669,19 +679,19 @@ def main():
     # Checks connectivity to cluster mgmt IP
     print('-> Checking connectivity to cluster Mgmt IP')
     if not check_connectivity(config["vRPAClusterIp"]):
-        print("\033[91m\033[1m---> vRPA Cluster IP is unreachable")
+        print("\033[91m\033[1m---> vRPA Cluster IP is unreachable\033[0m")
         sys.exit(1)
     # Additional delay for the deployment API server
     time.sleep(clusterWaitTimeout)
-    print('\033[92m\033[1m---> vRPA Cluster is reachable\033[m')
+    print('\033[92m\033[1m---> vRPA Cluster is reachable\033[0m')
 
     # Configures Plugin Server (by default, plugin server configuration is enabled)
     if configPluginServer:
         print('-> Checking connectivity to Plugin Server')
         if not check_connectivity(config["pluginServerIP"]):
-            print("\033[91m\033[1m---> Plugin Server is unreachable")
+            print("\033[91m\033[1m---> Plugin Server is unreachable\033[0m")
             sys.exit(1)
-        print('\033[92m\033[1m---> Plugin Server is reachable\033[m')
+        print('\033[92m\033[1m---> Plugin Server is reachable\033[0m')
         # Logins to the API using the new RP4VMs admin pwd
         uri = "https://{}{}".format(config["vRPAClusterIp"], apiEndpoint)
         loginPayload = {"username": username, "password": config["vRPAAdminPwd"]}
@@ -694,11 +704,11 @@ def main():
     if connectClustersCheck:
         # Makes sure that the IP of the other cluster has been specified in the config file
         if not config["partnerClusterVRpaClusterIP"]:
-            print('\033[91m\033[1m-> Missing peer cluster IP')
+            print("\033[91m\033[1m-> Missing peer cluster IP\033[0m")
             sys.exit(1)
         # Checks connectivity to the peer cluster mgmt IP
         if not check_connectivity(config["partnerClusterVRpaClusterIP"]):
-            print("\033[91m\033[1m---> Peer cluster IP is unreachable")
+            print("\033[91m\033[1m---> Peer cluster IP is unreachable\033[0m")
             sys.exit(1)
         # Logs into the peer cluster deployment API and connects the clusters
         existingClusterUri = "https://{}{}".format(config["partnerClusterVRpaClusterIP"], apiEndpoint)
@@ -707,7 +717,7 @@ def main():
         token = init_rest_call("POST", existingClusterLoginUri, loginPayload, loginPayload)
         token = token["token"]
         connect_clusters(config, existingClusterUri, token)
-        print('\033[92m\033[1m-> All tasks completed successfully\033[m')
+        print('\033[92m\033[1m-> All tasks completed successfully\033[0m')
 
 if __name__ == "__main__":
     main()
