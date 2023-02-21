@@ -72,9 +72,12 @@ def read_config(configfile):
             config["pluginServerSubnet"] = config["mgmtSubnet"]
         if (not config["pluginServerGateway"]):
             config["pluginServerGateway"] = config["mgmtGateway"]
+        if (not config["pluginServerNetwork"]):
+            config["pluginServerNetwork"] = config["mgmtNetwork"]
     except KeyError:
             config["pluginServerSubnet"] = config["mgmtSubnet"]
             config["pluginServerGateway"] = config["mgmtGateway"]
+            config["pluginServerNetwork"] = config["mgmtNetwork"]
     if (not config["vRPADatastore"]):
         config["vRPADatastore"] = config["repoDatastore"]
     if (not config["repoDatastore"] and not config["vRPADatastore"]):
@@ -198,7 +201,7 @@ def create_ovftool_command(config):
     # Forms the required ovftool commands
     print()
     ovfexecrpc = '{} --noDestinationSSLVerify --skipManifestCheck --acceptAllEulas --powerOn --name="{}" '.format(config["ovfToolLocation"], config["pluginServerName"])
-    ovfexecrpc += '--diskMode=thin --datastore={} --net:"Plugin Server Management Network"="{}" '.format(config["repoDatastore"], config["mgmtNetwork"])
+    ovfexecrpc += '--diskMode=thin --datastore={} --net:"Plugin Server Management Network"="{}" '.format(config["repoDatastore"], config["pluginServerNetwork"])
     ovfexecrpc += '--prop:vami.ip0.brs={} --prop:vami.netmask0.brs="{}" --prop:vami.gateway.brs="{}" '.format(config["pluginServerIP"], config["pluginServerSubnet"], config["pluginServerGateway"])
     ovfexecrpc += '--prop:vami.DNS.brs="{}" --prop:vami.fqdn.brs="{}" --prop:vami.ntp_servers.brs="{}" --allowExtraConfig '.format(" ".join(config["DNSServers"]), config["pluginServerFQDN"], " ".join(config["NTPServers"]))
     ovfexecrpc += '--extraConfig:RecoverPoint.PluginServer="RPC" "{}" vi://"{}":"{}"@{}/{}/host/{}/'.format(config["pluginServerOVALocation"], config["vcUser"], config["vcPassword"], config["vcIP"], config["datacenter"], config["esxCluster"])
