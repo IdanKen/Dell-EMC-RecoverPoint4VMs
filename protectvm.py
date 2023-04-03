@@ -8,7 +8,7 @@ import json
 import re
 import time
 
-# The purpose of this script is to facilitate VM Protection in RP4VMs
+# The purpose of this script is to facilitate backup/restore of settings in RP4VMs
 # The script exclusively uses the new RESTful API in RP4VMs 5.3
 # Author(s) - Idan Kentor <idan.kentor@dell.com>
 # Version 1 - August 2020
@@ -34,7 +34,18 @@ urllib3.disable_warnings()
 def get_args():
     # Get command line args from the user
     parser = argparse.ArgumentParser(
-        description='Script to perform ad-hoc VM backup in PowerProtect')
+        description='Script to perform ad-hoc VM backup in RecoverPoint for VMs',
+        formatter_class=argparse.RawTextHelpFormatter,
+        epilog = '''
+Examples:
+  List VMs candidate for protection:
+    python protectvm.py -s pluginserver.exampledomain.com -file securecreds -a list
+  Protect VM:
+    python protectvm.py -s pluginserver.exampledomain.com -file securecreds -a protect -n testvm
+  Protect VM by a specific RP4VMs cluster:
+    python protectvm.py -s pluginserver.exampledomain.com -file securecreds -a protect -n testvm2 -cl NY-CL1
+  Protect VM but do not monitor protection preparation task:
+    python protectvm.py -s pluginserver.exampledomain.com -file securecreds -a protect -n testvm3 -cl NY-CL1''')
     parser.add_argument('-s', '--server', required=True,
                         action='store', help='RP4VMs Plugin Server DNS name or IP')
     parser.add_argument('-file', '--credsfile', required=True,
