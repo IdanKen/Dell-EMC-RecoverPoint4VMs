@@ -18,6 +18,7 @@ import urllib3
 # Version 2 - November 2022
 # Version 3 - January 2023
 # Version 4 - February 2023
+# Version 5 - October 2023
 
 # Copyright [2023] [Idan Kentor]
 
@@ -63,10 +64,12 @@ def read_config(configfile):
     if 1 > config["vRPACount"] > 8 :
         print("\033[91m\033[1m->Illegal vRPA count - a vRPA cluster must have at least one vRPA and up to 8 vRPAs\033[0m")
         sys.exit(1)
-    config["vRPANames"] = []
-    for counter in range(config["vRPACount"]):
-        config["vRPANames"].append('{}_vRPA{}'.format(config["vRPAClusterName"], counter+1))
-    config["pluginServerName"] = '{}_Plugin-Server'.format(config["vRPAClusterName"])
+    if ("vRPANames" not in config) or (len(config["vRPANames"]) != config["vRPACount"]):
+        config["vRPANames"] = []
+        for counter in range(config["vRPACount"]):
+            config["vRPANames"].append('{}_vRPA{}'.format(config["vRPAClusterName"], counter+1))
+    if "pluginServerName" not in config:
+        config["pluginServerName"] = '{}_Plugin-Server'.format(config["vRPAClusterName"])
     try:
         if (not config["pluginServerSubnet"]):
             config["pluginServerSubnet"] = config["mgmtSubnet"]
@@ -108,6 +111,10 @@ def read_config(configfile):
     config["DNSServers"] = config["DNSServers"][0].split(", ")
     if not config["partnerClusterAdminPwd"]:
         config["partnerClusterAdminPwd"] = config["vRPAAdminPwd"]
+    if all(key in config for key in ("additionalGwIP", "additionalGwTgtNetwork", "additionalGwTgtNetmask")):
+        config["additionalGw"] = True
+    else:
+        config["additionalGw"] = False
     return config
 
 def compute_nic_role(config):
@@ -281,7 +288,11 @@ def monitor_deploy_activity(transaction, uri, token, deploy=None, adminPwd=None,
                     loginUri = '{}/user/sessions'.format(uri)
                     token = init_rest_call("POST", loginUri, login, login)
                     token = token["token"]
-                    response = init_rest_call("GET", monitorUri, token, None, None, True)
+                    try:
+                        response = init_rest_call("GET", monitorUri, token, None, None, True)
+                    except:
+                        time.sleep(30)
+                        response = init_rest_call("GET", monitorUri, token, None, None, True)
                     requiresAuth = True
         if response['state'] == 'SUCCESS':
             if deploy:
@@ -420,6 +431,7 @@ def config_repo(config, uri, token, vcCreds):
     sys.exit(1)
 
 def match_network_pgs(networkType, networkPg, commonPg):
+    # Matches specified network port groups to observed ones 
     if networkPg in commonPg:
         return networkPg
     else:
@@ -537,7 +549,7 @@ def bootstrap_cluster(config, uri, token, deployConfig):
         print("\033[92m\033[1m-> Cluster deployed successfully\033[0m")
     else:
         print("\033[91m\033[1m-> Cluster deployment failed\033[39m")
-        print(result[0]["message"])
+        print(result)
         sys.exit(1)
     return True
 
@@ -572,6 +584,26 @@ def check_connectivity(ipAddress):
             break
         time.sleep(interval)
     return ack
+
+def add_gateway(config, uri, token):
+    # Configures additional gateway for current cluster
+    print("-> Configuring additional gateway")
+    gwUri = '{}/clusters/current/gateways'.format(uri)
+    queryParams = {"timeout": "30", "isForce": "true"}
+    payload = {
+        "defaultGateways":[config["mgmtGateway"]],
+        "additionalGateways":[{
+            "targetNetwork": config["additionalGwTgtNetwork"],
+            "gatewayIP": config["additionalGatewayIP"],
+            "targetNetmask": config["additionalGwTgtNetmask"]}]
+            }
+    transaction = init_rest_call("PUT", gwUri, token, payload, queryParams)
+    result = monitor_deploy_activity(transaction["id"], uri, token)
+    if result["state"] == "SUCCESS":
+        print("\033[92m\033[1m---> Additional gateway configured successfully\033[0m")
+    else:
+        print("\033[91m\033[1m---> Could not configure additional gateway\033[39m")
+        sys.exit(1)
 
 def connect_clusters(config, uri, token):
     # Executes the connect cluster process including pre-checks
@@ -713,6 +745,9 @@ def main():
         if not check_connectivity(config["partnerClusterVRpaClusterIP"]):
             print("\033[91m\033[1m---> Peer cluster IP is unreachable\033[0m")
             sys.exit(1)
+        # Configures Additional gateway on newly deployed cluster
+        if config["additionalGw"]:
+            add_gateway(config, uri, token)
         # Logs into the peer cluster deployment API and connects the clusters
         existingClusterUri = "https://{}{}".format(config["partnerClusterVRpaClusterIP"], apiEndpoint)
         loginPayload = {"username": username, "password": config["partnerClusterAdminPwd"]}
