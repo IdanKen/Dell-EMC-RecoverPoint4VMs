@@ -5,7 +5,6 @@ import datetime
 import json
 import os
 import platform
-import re
 import subprocess
 import sys
 import time
@@ -19,6 +18,7 @@ import urllib3
 # Version 3 - January 2023
 # Version 4 - February 2023
 # Version 5 - October 2023
+# Version 6 - November 2023
 
 # Copyright [2023] [Idan Kentor]
 
@@ -67,7 +67,7 @@ def read_config(configfile):
     if ("vRPANames" not in config) or (len(config["vRPANames"]) != config["vRPACount"]):
         config["vRPANames"] = []
         for counter in range(config["vRPACount"]):
-            config["vRPANames"].append('{}_vRPA{}'.format(config["vRPAClusterName"], counter+1))
+            config["vRPANames"].append('{}_vRPA{}'.format(config["vRPAClusterName"], counter + 1))
     if "pluginServerName" not in config:
         config["pluginServerName"] = '{}_Plugin-Server'.format(config["vRPAClusterName"])
     try:
@@ -102,6 +102,8 @@ def read_config(configfile):
     if len(config["vRPAMgmtIPs"]) != config["vRPACount"]:
         print("\033[91m\033[1m->Incorrect number of vRPA management IPs")
         sys.exit(1)
+    if "vcPort" not in config:
+        config["vcPort"] = 443
     if not config["vRPAHWProfile"]:
         config["vRPAHWProfile"] = "Min"
     else:
@@ -338,10 +340,10 @@ def validate_virtual_env(config, uri, token):
         print("\033[92m\033[1m---> Pre-installation validation passed successfully\033[0m")
     elif result[0]["severity"] == "WARNING":
         print("\033[93m\033[1m---> Warnings detected in pre-installation validation\033[39m")
-        print(result[0]["message"])
+        print("--->", result[0]["message"])
     else:
         print("\033[91m\033[1m---> Errors detected in pre-installation validation\033[39m")
-        print(result[0]["message"])
+        print("--->", result[0]["message"])
         sys.exit(1)
     return vcCreds
 
@@ -387,32 +389,23 @@ def config_vrpas(config, uri, token, vcCreds):
     print("-> Searching for available vRPAs")
     availRPAs = monitor_deploy_activity(transaction["id"], uri, token)
     config["vRPAUuid"] = []
-    if len(availRPAs["availableVrpas"]) == config["vRPACount"]:
+    vrpaMatch = 0
+    if len(availRPAs["availableVrpas"]) >= config["vRPACount"]:
         for counter, vrpa in enumerate(availRPAs["availableVrpas"]):
-            match = re.match('.+(\d)', vrpa["vmName"])
-            vrpaPos = int(match.group(1)) - 1
-            vrpaInfoTemp = availRPAs["availableVrpas"][vrpaPos]
-            availRPAs["availableVrpas"][vrpaPos] = vrpa
-            availRPAs["availableVrpas"][counter] = vrpaInfoTemp
-            config["vRPAUuid"].append(availRPAs["availableVrpas"][vrpaPos]["vmUuid"])
-    elif len(availRPAs["availableVrpas"]) < config["vRPACount"]:
-        print("\031[91m\033[1m---> Could not detect sufficient number of available vRPAs\033[39m")
-        sys.exit(1)
-    else:
-        vrpaNameMatch = 0
-        for counter, vrpa in enumerate(availRPAs["availableVrpas"]):
-            if vrpa["vmname"] in config["vRPANames"]:
+            if vrpa["vmName"] in config["vRPANames"]:
                 if vrpa["ipInfo"]["ipAddress"]["ip"] in config["vRPAMgmtIPs"]:
-                    vrpaNameMatch += 1
-                    match = re.match('.+(\d)', vrpa["vmName"])
-                    vrpaPos = int(match.group(1)) - 1
+                    vrpaMatch += 1
+                    vrpaPos = config["vRPANames"].index(vrpa["vmName"])
                     vrpaInfoTemp = availRPAs["availableVrpas"][vrpaPos]
                     availRPAs["availableVrpas"][vrpaPos] = vrpa
                     availRPAs["availableVrpas"][counter] = vrpaInfoTemp
                     config["vRPAUuid"].append(availRPAs["availableVrpas"][vrpaPos]["vmUuid"])
-        if vrpaNameMatch != config["vRPACount"]:
+        if vrpaMatch != config["vRPACount"]:
             print("\033[91m\033[1m---> Could not detect sufficient number of available vRPAs\033[39m")
             sys.exit(1)
+    else:
+        print("\031[91m\033[1m---> Could not detect sufficient number of available vRPAs\033[39m")
+        sys.exit(1)
     config["vRPAInfo"] = availRPAs["availableVrpas"]
     return config
 
@@ -629,10 +622,10 @@ def connect_clusters(config, uri, token):
         print("\033[92m\033[1m---> Clusters Connect completed successfully\033[0m")
     elif result["state"] == "WARNING":
         print("\033[93m\033[1m---> Warnings detected in the Cluster connection Process\033[39m")
-        print(result["message"])
+        print("--->", result["message"])
     else:
         print("\033[91m\033[1m---> Errors detected in the cluster connection process\033[39m")
-        print(result[0]["message"])
+        print("--->", result[0]["message"])
         sys.exit(1)
 
 def main():
@@ -649,7 +642,7 @@ def main():
     config["wanEncryption"] = "ENCRYPT"
     clusterWaitTimeout = 120
 
-    # Detect splitter type. IOF is valid on RPVM 6.0 and later
+    # Detect splitter type. IOF is valid for RPVM 6.0 and later
     try:
         if not config["splitterType"]:
             config["splitterType"] = ["VSCSI"]
@@ -738,7 +731,11 @@ def main():
     # Connects the newly deployed RP4VMs cluster to a different cluster (option enabled by default)
     if connectClustersCheck:
         # Makes sure that the IP of the other cluster has been specified in the config file
-        if not config["partnerClusterVRpaClusterIP"]:
+        try:
+            if not config["partnerClusterVRpaClusterIP"]:
+                print("\033[91m\033[1m-> Missing peer cluster IP\033[0m")
+                sys.exit(1)
+        except KeyError:
             print("\033[91m\033[1m-> Missing peer cluster IP\033[0m")
             sys.exit(1)
         # Checks connectivity to the peer cluster mgmt IP
