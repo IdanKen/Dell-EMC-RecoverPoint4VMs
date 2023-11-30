@@ -19,6 +19,7 @@ import urllib3
 # Version 4 - February 2023
 # Version 5 - October 2023
 # Version 6 - November 2023
+# Version 7 - December 2023
 
 # Copyright [2023] [Idan Kentor]
 
@@ -61,57 +62,57 @@ def read_config(configfile):
     for key in list(config.keys()):
       if key.startswith('_comment'):
             config.pop(key)
+    config["vRPACount"] = config.get("vRPACount", 2)
     if 1 > config["vRPACount"] > 8 :
         print("\033[91m\033[1m->Illegal vRPA count - a vRPA cluster must have at least one vRPA and up to 8 vRPAs\033[0m")
         sys.exit(1)
-    if ("vRPANames" not in config) or (len(config["vRPANames"]) != config["vRPACount"]):
+    config["vRPANames"] = config.get("vRPANames")
+    if not config["vRPANames"] or (len(config["vRPANames"]) != config["vRPACount"]):
         config["vRPANames"] = []
         for counter in range(config["vRPACount"]):
             config["vRPANames"].append('{}_vRPA{}'.format(config["vRPAClusterName"], counter + 1))
-    if "pluginServerName" not in config:
+    if not config.get("pluginServerName"):
         config["pluginServerName"] = '{}_Plugin-Server'.format(config["vRPAClusterName"])
-    try:
-        if (not config["pluginServerSubnet"]):
+    if all(key in config for key in ("vRPAClusterIp", "vRPAMgmtIPs", "mgmtSubnet", "mgmtNetwork", "mgmtGateway")):
+        if not config.get("pluginServerSubnet"):
             config["pluginServerSubnet"] = config["mgmtSubnet"]
-        if (not config["pluginServerGateway"]):
+        if not config.get("pluginServerGateway"):
             config["pluginServerGateway"] = config["mgmtGateway"]
-        if (not config["pluginServerNetwork"]):
+        if not config.get("pluginServerNetwork"):
             config["pluginServerNetwork"] = config["mgmtNetwork"]
-    except KeyError:
-            config["pluginServerSubnet"] = config["mgmtSubnet"]
-            config["pluginServerGateway"] = config["mgmtGateway"]
-            config["pluginServerNetwork"] = config["mgmtNetwork"]
-    if (not config["vRPADatastore"]):
-        config["vRPADatastore"] = config["repoDatastore"]
-    if (not config["repoDatastore"] and not config["vRPADatastore"]):
+    else:
+        print("\033[91m\033[1m->Missing IP configuration parameters\033[0m")
+        sys.exit(1)
+    if (not config.get("repoDatastore") and not config.get("vRPADatastore")):
         print("\033[91m\033[1m->No Datastore provided, specify DS for repository and/or vRPAs\033[0m")
         sys.exit(1)
-    if (not config["vRPADatastore"]):
+    if not config.get("vRPADatastore"):
         config["vRPADatastore"] = config["repoDatastore"]
-    if (not config["repoDatastore"]):
+    if not config.get("repoDatastore"):
         config["repoDatastore"] = config["vRPADatastore"]
-    if not config["mgmtMTU"]:
+    if not config.get("mgmtMTU"):
         config["mgmtMTU"] = 1500
-    if not config["wanMTU"]:
+    if not config.get("wanMTU"):
         config["wanMTU"] = 1500
-    if not config["dataMTU"]:
+    if not config.get("dataMTU"):
         config["dataMTU"] = 1500
-    if not config["mgmtNetwork"]:
-        print("\033[91m\033[1m->Management Network Port Group must be specified")
-        sys.exit(1)
     if len(config["vRPAMgmtIPs"]) != config["vRPACount"]:
-        print("\033[91m\033[1m->Incorrect number of vRPA management IPs")
+        print("\033[91m\033[1m->Incorrect number of vRPA management IPs\033[0m")
         sys.exit(1)
-    if "vcPort" not in config:
+    if not config.get("vcPort"):
         config["vcPort"] = 443
-    if not config["vRPAHWProfile"]:
+    if not config.get("vRPAHWProfile"):
         config["vRPAHWProfile"] = "Min"
     else:
         hwProfile = {'Bronze': "Min", 'Silver': "Med", 'Gold': "Max"}
         config["vRPAHWProfile"] = hwProfile[config["vRPAHWProfile"]]
-    config["NTPServers"] = config["NTPServers"][0].split(", ")
-    config["DNSServers"] = config["DNSServers"][0].split(", ")
-    if not config["partnerClusterAdminPwd"]:
+    if config.get("NTPServers") and config.get("DNSServers"):
+        config["NTPServers"] = config["NTPServers"][0].split(", ")
+        config["DNSServers"] = config["DNSServers"][0].split(", ")
+    else:
+        print("\033[91m\033[1m->Missing DNS and/or NTP settings\033[0m")
+        sys.exit(1)
+    if not config.get("partnerClusterAdminPwd"):
         config["partnerClusterAdminPwd"] = config["vRPAAdminPwd"]
     if all(key in config for key in ("additionalGwIP", "additionalGwTgtNetwork", "additionalGwTgtNetmask")):
         config["additionalGw"] = True
@@ -168,10 +169,10 @@ def compute_nic_role(config):
             config["nicRole"].append(NicRoleTag)
     elif config["networkTopology"] == "ALL_ARE_SEPARATED":
         if not config["wanNetwork"] or not config["dataNetwork"]:
-            print("\033[91m\033[1m->WAN and Data Network Port Groups must be specified\033[39m")
+            print("\033[91m\033[1m->WAN and Data Network Port Groups must be specified\033[0m")
             sys.exit(1)
         elif config["vRPACount"] != len(config["vRPAWANIPs"]) or config["vRPACount"] != len(config["vRPADataIPs"]):
-            print("\033[91m\033[1m->incorrect number of vRPA WAN and/or Data IPs\033[39m")
+            print("\033[91m\033[1m->incorrect number of vRPA WAN and/or Data IPs\033[0m")
             sys.exit(1)
         config["nicRoleMtu"] = {"WAN": int(config["wanMTU"]), "LAN": int(config["mgmtMTU"]), "DATA": int(config["dataMTU"])}
         config["nicRoleVlan"] = {"WAN": config["wanNetwork"], "LAN": config["mgmtNetwork"], "DATA": config["dataNetwork"]}
@@ -202,7 +203,7 @@ def compute_nic_role(config):
             NicRoleTag["WAN_LAN_DATA"] = {"ipInfoList": [ipInfoList]}
             config["nicRole"].append(NicRoleTag)
     else:
-        print("\033[91m\033[1m->Illegal network topology\033[39m")
+        print("\033[91m\033[1m->Illegal network topology\033[0m")
         sys.exit(1)
     return config
 
@@ -253,10 +254,10 @@ def init_rest_call(callType, uri, token, payload=None, params=None, deploy=None)
     except requests.exceptions.ConnectionError as err:
         if deploy:
             return False
-        print('\033[91m\033[1m->Error Connecting to {}: {}\033[39m'.format(uri, err))
+        print('\033[91m\033[1m->Error Connecting to {}: {}\033[0m'.format(uri, err))
         sys.exit(1)
     except requests.exceptions.Timeout as err:
-        print('\033[91m\033[1m->Connection timed out {}: {}\033[39m'.format(urllib3, err))
+        print('\033[91m\033[1m->Connection timed out {}: {}\033[0m'.format(urllib3, err))
         sys.exit(1)
     except requests.exceptions.RequestException as err:
         if deploy and response.status_code == 401:
@@ -339,10 +340,10 @@ def validate_virtual_env(config, uri, token):
     if result[0]["severity"] == "SUCCESS":
         print("\033[92m\033[1m---> Pre-installation validation passed successfully\033[0m")
     elif result[0]["severity"] == "WARNING":
-        print("\033[93m\033[1m---> Warnings detected in pre-installation validation\033[39m")
+        print("\033[93m\033[1m---> Warnings detected in pre-installation validation\033[0m")
         print("--->", result[0]["message"])
     else:
-        print("\033[91m\033[1m---> Errors detected in pre-installation validation\033[39m")
+        print("\033[91m\033[1m---> Errors detected in pre-installation validation\033[0m")
         print("--->", result[0]["message"])
         sys.exit(1)
     return vcCreds
@@ -401,10 +402,10 @@ def config_vrpas(config, uri, token, vcCreds):
                     availRPAs["availableVrpas"][counter] = vrpaInfoTemp
                     config["vRPAUuid"].append(availRPAs["availableVrpas"][vrpaPos]["vmUuid"])
         if vrpaMatch != config["vRPACount"]:
-            print("\033[91m\033[1m---> Could not detect sufficient number of available vRPAs\033[39m")
+            print("\033[91m\033[1m---> Could not detect sufficient number of available vRPAs\033[0m")
             sys.exit(1)
     else:
-        print("\031[91m\033[1m---> Could not detect sufficient number of available vRPAs\033[39m")
+        print("\031[91m\033[1m---> Could not detect sufficient number of available vRPAs\033[0m")
         sys.exit(1)
     config["vRPAInfo"] = availRPAs["availableVrpas"]
     return config
@@ -420,7 +421,7 @@ def config_repo(config, uri, token, vcCreds):
             print("-> DS for Repository Volume detected")
             config["repoUid"] = ds["uid"]
             return config
-    print("\031[94m\033[1m-> Repository DS could not be found\033[39m")
+    print("\031[94m\033[1m-> Repository DS could not be found\033[0m")
     sys.exit(1)
 
 def match_network_pgs(networkType, networkPg, commonPg):
@@ -436,8 +437,8 @@ def match_network_pgs(networkType, networkPg, commonPg):
         if counter == 1:
             return matchedPortGroup
         elif counter > 1:
-            print("\031[94m\033[1m-> Multiple {} networks detected, use exact name\033[39m".format(networkType))
-            print("\031[94m\033[1m-> Use the following convention: 'PG (vDS)'\033[39m")
+            print("\031[94m\033[1m-> Multiple {} networks detected, use exact name\033[0m".format(networkType))
+            print("\031[94m\033[1m-> Use the following convention: 'PG (vDS)'\033[0m")
             sys.exit(1)
         else:
             return False
@@ -452,7 +453,7 @@ def validate_network_pgs(config, uri, token, vcCreds):
         config["mgmtNetwork"] = matchedPortGroup
         print("-> Mgmt Network detected")
     else:
-        print("\031[94m\033[1m-> Mgmt Network could not be found\033[39m")
+        print("\031[94m\033[1m-> Mgmt Network could not be found\033[0m")
         sys.exit(1)
     if config["networkTopology"] == "DATA_IS_SEPARATED":
         matchedPortGroup = match_network_pgs("Data", config["dataNetwork"], commonPg)
@@ -460,7 +461,7 @@ def validate_network_pgs(config, uri, token, vcCreds):
             config["dataNetwork"] = matchedPortGroup
             print("-> Data Network detected")
         else:
-            print("\031[94m\033[1m-> Data Network could not be found\033[39m")
+            print("\031[94m\033[1m-> Data Network could not be found\033[0m")
             sys.exit(1)
     elif config["networkTopology"] == "WAN_IS_SEPARATED":
         matchedPortGroup = match_network_pgs("WAN", config["wanNetwork"], commonPg)
@@ -468,20 +469,20 @@ def validate_network_pgs(config, uri, token, vcCreds):
             config["wanNetwork"] = matchedPortGroup
             print("-> WAN Network detected")
         else:
-            print("\031[94m\033[1m-> WAN Network could not be found")
+            print("\031[94m\033[1m-> WAN Network could not be found\033[0m")
             sys.exit(1)
     elif config["networkTopology"] == "ALL_ARE_SEPARATED":
         matchedPortGroup = match_network_pgs("WAN", config["wanNetwork"], commonPg)
         if matchedPortGroup:
             config["wanNetwork"] = matchedPortGroup
         else:
-            print("\031[94m\033[1m-> WAN Network could not be found")
+            print("\031[94m\033[1m-> WAN Network could not be found\033[0m")
             sys.exit(1)
         matchedPortGroup = match_network_pgs("Data", config["dataNetwork"], commonPg)
         if matchedPortGroup:
             config["dataNetwork"] = matchedPortGroup
         else:
-            print("\031[94m\033[1m-> Data Network could not be found\033[39m")
+            print("\031[94m\033[1m-> Data Network could not be found\033[0m")
             sys.exit(1)
         print("-> WAN and Data Networks detected")
     return config
@@ -541,7 +542,7 @@ def bootstrap_cluster(config, uri, token, deployConfig):
     if result:
         print("\033[92m\033[1m-> Cluster deployed successfully\033[0m")
     else:
-        print("\033[91m\033[1m-> Cluster deployment failed\033[39m")
+        print("\033[91m\033[1m-> Cluster deployment failed\033[0m")
         print(result)
         sys.exit(1)
     return True
@@ -595,7 +596,7 @@ def add_gateway(config, uri, token):
     if result["state"] == "SUCCESS":
         print("\033[92m\033[1m---> Additional gateway configured successfully\033[0m")
     else:
-        print("\033[91m\033[1m---> Could not configure additional gateway\033[39m")
+        print("\033[91m\033[1m---> Could not configure additional gateway\033[0m")
         sys.exit(1)
 
 def connect_clusters(config, uri, token):
@@ -612,7 +613,7 @@ def connect_clusters(config, uri, token):
     if result[1]["severity"] == "SUCCESS":
         print("\033[92m\033[1m---> Connectivity checks to peer cluster completed successfully\033[0m")
     else:
-        print("\033[91m\033[1m---> Connectivity issues to peer cluster detected\033[39m")
+        print("\033[91m\033[1m---> Connectivity issues to peer cluster detected\033[0m")
         sys.exit(1)
     print("-> Connecting clusters")
     connectUri = '{}/clusters/current/links/ip'.format(uri)
@@ -624,7 +625,7 @@ def connect_clusters(config, uri, token):
         print("\033[93m\033[1m---> Warnings detected in the Cluster connection Process\033[39m")
         print("--->", result["message"])
     else:
-        print("\033[91m\033[1m---> Errors detected in the cluster connection process\033[39m")
+        print("\033[91m\033[1m---> Errors detected in the cluster connection process\033[0m")
         print("--->", result[0]["message"])
         sys.exit(1)
 
@@ -641,20 +642,16 @@ def main():
     username, password = "admin", "admin"
     config["wanEncryption"] = "ENCRYPT"
     clusterWaitTimeout = 120
+    defaultSplitterType = "VSCSI"
 
     # Detect splitter type. IOF is valid for RPVM 6.0 and later
-    try:
-        if not config["splitterType"]:
-            config["splitterType"] = ["VSCSI"]
-        elif config["splitterType"] == "VSCSI":
-            config["splitterType"] = ["VSCSI"]
-        elif config["splitterType"] == "IOF":
-            config["splitterType"] = ["IOF"]
-        else:
-            print('\033[91m\033[1m-> Wrong splitterType - either VSCSI or IOF\033[0m')
-            sys.exit(1)
-    except KeyError:
-        config["splitterType"] = ["VSCSI"]
+    if not config.get("splitterType"):
+        config["splitterType"] = [defaultSplitterType]
+    elif config["splitterType"] in ("VSCSI", "IOF"):
+        config["splitterType"] = [config["splitterType"]]
+    else:
+        print('\033[91m\033[1m-> The wrong splitterType was provided - must be either VSCSI or IOF\033[0m')
+        sys.exit(1)
    
     # Creates the ovftool commands for Plugin Server and vRPAs
     ovfexecrpc, ovfexecvrpa = create_ovftool_command(config)
