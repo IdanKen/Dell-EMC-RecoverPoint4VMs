@@ -12,14 +12,7 @@ import urllib3
 
 # The purpose of this script is to automate RP4VMs deployment
 # Author - Idan Kentor <idan.kentor@dell.com>
-# Version 1 - September 2022
-# Version 2 - November 2022
-# Version 3 - January 2023
-# Version 4 - February 2023
-# Version 5 - October 2023
-# Version 6 - November 2023
-# Version 7 - December 2023
-# Version 8 - January 2024
+# Version 9 - January 2024
 
 # Copyright [2024] [Idan Kentor]
 
@@ -39,7 +32,7 @@ urllib3.disable_warnings()
 
 
 def get_args():
-    ''' Gets command line args from the user '''
+    """Gets command line args from the user"""
     parser = argparse.ArgumentParser(
         description='Script to automate RP4VMs deployment')
     parser.add_argument('-configfile', '--config-file', required=True,
@@ -58,7 +51,7 @@ def get_args():
 
 
 def read_config(configfile):
-    ''' Reads config file, validate params and assigns to config dictionary '''
+    """Reads config file, validate params and assigns to config dictionary"""
     with open(configfile, 'r', encoding="utf-8") as file_handle:
         try:
             config = json.load(file_handle)
@@ -123,9 +116,8 @@ def read_config(configfile):
         raise SystemExit(1)
     if not config.get("partnerClusterAdminPwd"):
         config["partnerClusterAdminPwd"] = config["vRPAAdminPwd"]
-    if all(key in config for key in
-           ("additionalGwIP", "additionalGwTgtNetwork",
-            "additionalGwTgtNetmask")):
+    if all([config.get("additionalGwIP"), config.get("additionalGwTgtNetwork"),
+            config.get("additionalGwTgtNetmask")]):
         config["additionalGw"] = True
     else:
         config["additionalGw"] = False
@@ -133,7 +125,7 @@ def read_config(configfile):
 
 
 def compute_nic_role(config):
-    ''' Computes the NIC role data structures '''
+    """Computes the NIC role data structures"""
     config["nicRole"] = []
     if config["networkTopology"] == "DATA_IS_SEPARATED":
         if not config["dataNetwork"]:
@@ -142,19 +134,31 @@ def compute_nic_role(config):
         if len(config["vRPADataIPs"]) != config["vRPACount"]:
             print("\033[91m\033[1m->Incorrect number of vRPA data IPs\033[0m")
             raise SystemExit(1)
-        config["nicRoleMtu"] = {"WAN_LAN": config["mgmtMTU"], "DATA": config["dataMTU"]}
-        config["nicRoleVlan"] = {"WAN_LAN": config["mgmtNetwork"], "DATA": config["dataNetwork"]}
+        config["nicRoleMtu"] = {
+            "WAN_LAN": config["mgmtMTU"],
+            "DATA": config["dataMTU"]
+        }
+        config["nicRoleVlan"] = {
+            "WAN_LAN": config["mgmtNetwork"],
+            "DATA": config["dataNetwork"]
+        }
         for counter in range(config["vRPACount"]):
             NicRoleTag = {}
             ipInfoList = {}
             dataIpInfoList = {}
             ipInfoList["ipVersion"] = "IP_V_4"
             ipInfoList["fromDHCP"] = False
-            ipInfoList["ipAddress"] = {"ip": config["vRPAMgmtIPs"][counter], "netmask": config["mgmtSubnet"]}
+            ipInfoList["ipAddress"] = {
+                "ip": config["vRPAMgmtIPs"][counter],
+                "netmask": config["mgmtSubnet"]
+            }
             NicRoleTag["WAN_LAN"] = {"ipInfoList": [ipInfoList]}
             dataIpInfoList["ipVersion"] = "IP_V_4"
             dataIpInfoList["fromDHCP"] = False
-            dataIpInfoList["ipAddress"] = {"ip": config["vRPADataIPs"][counter], "netmask": config["dataSubnet"]}
+            dataIpInfoList["ipAddress"] = {
+                "ip": config["vRPADataIPs"][counter],
+                "netmask": config["dataSubnet"]
+            }
             NicRoleTag["DATA"] = {"ipInfoList": [dataIpInfoList]}
             config["nicRole"].append(NicRoleTag)
     elif config["networkTopology"] == "WAN_IS_SEPARATED":
@@ -164,19 +168,31 @@ def compute_nic_role(config):
         if len(config["vRPAWANIPs"]) != config["vRPACount"]:
             print("\033[91m\033[1m->incorrect number of vRPA WAN IPs\033[0m")
             raise SystemExit(1)
-        config["nicRoleMtu"] = {"LAN_DATA": int(config["mgmtMTU"]), "WAN": int(config["wanMTU"])}
-        config["nicRoleVlan"] = {"LAN_DATA": config["mgmtNetwork"], "WAN": config["wanNetwork"]}
+        config["nicRoleMtu"] = {
+            "LAN_DATA": int(config["mgmtMTU"]),
+            "WAN": int(config["wanMTU"])
+        }
+        config["nicRoleVlan"] = {
+            "LAN_DATA": config["mgmtNetwork"],
+            "WAN": config["wanNetwork"]
+        }
         for counter in range(config["vRPACount"]):
             NicRoleTag = {}
             ipInfoList = {}
             wanIpInfoList = {}
             ipInfoList["ipVersion"] = "IP_V_4"
             ipInfoList["fromDHCP"] = False
-            ipInfoList["ipAddress"] = {"ip": config["vRPAMgmtIPs"][counter], "netmask": config["mgmtSubnet"]}
+            ipInfoList["ipAddress"] = {
+                "ip": config["vRPAMgmtIPs"][counter],
+                "netmask": config["mgmtSubnet"]
+            }
             NicRoleTag["LAN_DATA"] = {"ipInfoList": [ipInfoList]}
             wanIpInfoList["ipVersion"] = "IP_V_4"
             wanIpInfoList["fromDHCP"] = False
-            wanIpInfoList["ipAddress"] = {"ip": config["vRPAWANIPs"][counter], "netmask": config["wanSubnet"]}
+            wanIpInfoList["ipAddress"] = {
+                "ip": config["vRPAWANIPs"][counter],
+                "netmask": config["wanSubnet"]
+            }
             NicRoleTag["WAN"] = {"ipInfoList": [wanIpInfoList]}
             config["nicRole"].append(NicRoleTag)
     elif config["networkTopology"] == "ALL_ARE_SEPARATED":
@@ -186,8 +202,16 @@ def compute_nic_role(config):
         if config["vRPACount"] != len(config["vRPAWANIPs"]) or config["vRPACount"] != len(config["vRPADataIPs"]):
             print("\033[91m\033[1m->incorrect number of vRPA WAN and/or Data IPs\033[0m")
             raise SystemExit(1)
-        config["nicRoleMtu"] = {"WAN": int(config["wanMTU"]), "LAN": int(config["mgmtMTU"]), "DATA": int(config["dataMTU"])}
-        config["nicRoleVlan"] = {"WAN": config["wanNetwork"], "LAN": config["mgmtNetwork"], "DATA": config["dataNetwork"]}
+        config["nicRoleMtu"] = {
+            "WAN": int(config["wanMTU"]),
+            "LAN": int(config["mgmtMTU"]),
+            "DATA": int(config["dataMTU"])
+        }
+        config["nicRoleVlan"] = {
+            "WAN": config["wanNetwork"],
+            "LAN": config["mgmtNetwork"],
+            "DATA": config["dataNetwork"]
+        }
         for counter in range(config["vRPACount"]):
             NicRoleTag = {}
             ipInfoList = {}
@@ -195,15 +219,24 @@ def compute_nic_role(config):
             dataIpInfoList = {}
             ipInfoList["ipVersion"] = "IP_V_4"
             ipInfoList["fromDHCP"] = False
-            ipInfoList["ipAddress"] = {"ip": config["vRPAMgmtIPs"][counter], "netmask": config["mgmtSubnet"]}
+            ipInfoList["ipAddress"] = {
+                "ip": config["vRPAMgmtIPs"][counter],
+                "netmask": config["mgmtSubnet"]
+            }
             NicRoleTag["LAN"] = {"ipInfoList": [ipInfoList]}
             wanIpInfoList["ipVersion"] = "IP_V_4"
             wanIpInfoList["fromDHCP"] = False
-            wanIpInfoList["ipAddress"] = {"ip": config["vRPAWANIPs"][counter], "netmask": config["wanSubnet"]}
+            wanIpInfoList["ipAddress"] = {
+                "ip": config["vRPAWANIPs"][counter],
+                "netmask": config["wanSubnet"]
+            }
             NicRoleTag["WAN"] = {"ipInfoList": [wanIpInfoList]}
             dataIpInfoList["ipVersion"] = "IP_V_4"
             dataIpInfoList["fromDHCP"] = False
-            dataIpInfoList["ipAddress"] = {"ip": config["vRPADataIPs"][counter], "netmask": config["dataSubnet"]}
+            dataIpInfoList["ipAddress"] = {
+                "ip": config["vRPADataIPs"][counter],
+                "netmask": config["dataSubnet"]
+            }
             NicRoleTag["DATA"] = {"ipInfoList": [dataIpInfoList]}
             config["nicRole"].append(NicRoleTag)
     elif config["networkTopology"] == "ALL_IN_ONE":
@@ -221,7 +254,7 @@ def compute_nic_role(config):
 
 
 def create_ovftool_command(config):
-    ''' Forms the required ovftool commands '''
+    """Forms the required ovftool commands"""
     print()
     ovfexecrpc = f'{config["ovfToolLocation"]} --noDestinationSSLVerify --skipManifestCheck --acceptAllEulas --powerOn --name="{config["pluginServerName"]}" '
     ovfexecrpc += f'--diskMode=thin --datastore={config["repoDatastore"]} --net:"Plugin Server Management Network"="{config["pluginServerNetwork"]}" '
@@ -239,9 +272,9 @@ def create_ovftool_command(config):
 
 
 def exec_ova_provisioning(ovfexec):
-    ''' Executes ovftool commands '''
+    """Executes ovftool commands"""
     exitCode = os.system(ovfexec)
-    if (exitCode == 0):
+    if exitCode == 0:
         print("\033[92m\033[1m ---> OVA deployment completed successfully\033[0m")
     else:
         print("\033[91m\033[1m ---> OVA deployment failed\033[0m")
@@ -249,7 +282,7 @@ def exec_ova_provisioning(ovfexec):
 
 
 def init_rest_call(callType, uri, token, payload=None, params=None, deploy=None):
-    ''' Generic function for REST calls '''
+    """Generic function for REST calls"""
     if uri.endswith("/user/sessions"):
         headers = {'Content-Type': 'application/json'}
     else:
@@ -259,11 +292,23 @@ def init_rest_call(callType, uri, token, payload=None, params=None, deploy=None)
     timeout = 60
     try:
         if callType.lower() == "get":
-            response = requests.get(uri, headers=headers, params=params, verify=verify, timeout=timeout)
-        elif callType.lower() == "post":
-            response = requests.post(uri, headers=headers, params=params, data=payload, verify=verify, timeout=timeout)
-        elif callType.lower() == "put":
-            response = requests.put(uri, headers=headers, params=params, data=payload, verify=verify, timeout=timeout)
+            response = requests.get(
+                uri,
+                headers=headers,
+                params=params,
+                verify=verify,
+                timeout=timeout
+            )
+        else:
+            response = requests.request(
+                callType,
+                uri,
+                headers=headers,
+                params=params,
+                data=payload,
+                verify=verify,
+                timeout=timeout
+            )
         response.raise_for_status()
     except requests.exceptions.ConnectionError as error:
         if deploy:
@@ -283,7 +328,7 @@ def init_rest_call(callType, uri, token, payload=None, params=None, deploy=None)
 
 
 def monitor_deploy_activity(transaction, uri, token, deploy=None, adminPwd=None, connect=None):
-    ''' Generic function to monitor deployment API calls '''
+    """Generic function to monitor deployment API calls"""
     username = "admin"
     monitorUri = f"{uri}/transactions/{transaction}"
     timeout = 600
@@ -326,7 +371,7 @@ def monitor_deploy_activity(transaction, uri, token, deploy=None, adminPwd=None,
 
 
 def handle_array_certificate(arrayIP, uri, token, arrayPort):
-    ''' Handles certificates approval via REST '''
+    """Handles certificates approval via REST"""
     payload = {"ip": arrayIP, "port": arrayPort}
     certUri = f"{uri}/arrays/certificate"
     cert = init_rest_call("POST", certUri, token, payload)
@@ -338,7 +383,7 @@ def handle_array_certificate(arrayIP, uri, token, arrayPort):
 
 
 def validate_virtual_env(config, uri, token):
-    ''' Executes pre-deployment validation checks '''
+    """Executes pre-deployment validation checks"""
     payload = handle_array_certificate(config["vcIP"], uri, token, config["vcPort"])
     vcUri = f"{uri}/current_rpa/virtual_center"
     vcCreds = {
@@ -366,21 +411,20 @@ def validate_virtual_env(config, uri, token):
 
 
 def check_ntp_dns(config, uri, token, vcCreds):
-    ''' Checks NTP and DNS server input '''
+    """Checks NTP and DNS server input"""
     if config["NTPServers"] and config["DNSServers"]:
         return config
-    else:
-        recNetUri = f"{uri}/operations/recommended_network_configuration"
-        recNet = init_rest_call("POST", recNetUri, token, vcCreds)
-        if not config["NTPServers"]:
-            config["NTPServers"] = recNet["ntpServersIps"]
-        if not config["DNSServers"]:
-            config["DNSServers"] = recNet["dnsServersIps"]
-        return config
+    recNetUri = f"{uri}/operations/recommended_network_configuration"
+    recNet = init_rest_call("POST", recNetUri, token, vcCreds)
+    if not config["NTPServers"]:
+        config["NTPServers"] = recNet["ntpServersIps"]
+    if not config["DNSServers"]:
+        config["DNSServers"] = recNet["dnsServersIps"]
+    return config
 
 
 def find_timezone(config, uri, token):
-    ''' Determines the time zone '''
+    """Determines the time zone"""
     if not config["timezone"]:
         config["timezone"] = str(datetime.datetime.now().astimezone().tzinfo).split(' ')[0]
     if config["timezone"].lower() == "eastern" or config["timezone"].lower() == "et":
@@ -401,7 +445,7 @@ def find_timezone(config, uri, token):
 
 
 def config_vrpas(config, uri, token, vcCreds):
-    ''' Searches for available vRPAs using REST '''
+    """Searches for available vRPAs using REST"""
     availRPAsUri = f"{uri}/arrays/virtual_center/entities/available_rpas/deploy"
     vcCreds = {"vcCredentials": vcCreds}
     vcCreds["includeCurrentClusterRPAs"] = True
@@ -431,7 +475,7 @@ def config_vrpas(config, uri, token, vcCreds):
 
 
 def config_repo(config, uri, token, vcCreds):
-    ''' Determines datastore for the repository volume '''
+    """Determines datastore for the repository volume"""
     availResPoolUri = f"{uri}/arrays/VIRTUAL_CENTER/available_resource_pools"
     payload = {"arrayCredentials": vcCreds, "rpasIps": config["vRPAMgmtIPs"]}
     payload["splitterTypesToInstall"] = config["splitterType"]
@@ -446,7 +490,7 @@ def config_repo(config, uri, token, vcCreds):
 
 
 def match_network_pgs(networkType, networkPg, commonPg):
-    ''' Matches specified network port groups to observed ones '''
+    """Matches specified network port groups to observed ones"""
     if networkPg in commonPg:
         return networkPg
     counter = 0
@@ -460,12 +504,11 @@ def match_network_pgs(networkType, networkPg, commonPg):
         print(f"\031[94m\033[1m-> Multiple {networkType} networks detected, use exact name\033[0m")
         print("\031[94m\033[1m-> Use the following convention: 'PG (vDS)'\033[0m")
         raise SystemExit(1)
-    else:
-        return False
+    return False
 
 
 def validate_network_pgs(config, uri, token, vcCreds):
-    ''' Validates network port groups '''
+    """Validates network port groups"""
     commonPgUri = f"{uri}/operations/common_vlan_names"
     payload = {"vmUids": config["vRPAUuid"], "arrayCreds": vcCreds}
     commonPg = init_rest_call("POST", commonPgUri, token, payload)
@@ -510,7 +553,7 @@ def validate_network_pgs(config, uri, token, vcCreds):
 
 
 def build_deploy_config(config, vcCreds):
-    ''' Build cluster deployment data structure '''
+    """Build cluster deployment data structure"""
     deployConfig = {}
     basicClusterInfo = {}
     dgwDetails = {"gatewayIP": config["mgmtGateway"], "targetNetmask": "0.0.0.0", "targetNetwork": "default"}
@@ -557,7 +600,7 @@ def build_deploy_config(config, vcCreds):
 
 
 def bootstrap_cluster(config, uri, token, deployConfig):
-    ''' Executes the cluster deployment process '''
+    """Executes the cluster deployment process"""
     bootstrapUri = f"{uri}/clusters"
     queryParams = {"force": "true", "deploy": "true", "retry": "false", "performDeployValidations": "false"}
     transaction = init_rest_call("POST", bootstrapUri, token, deployConfig, queryParams)
@@ -572,7 +615,7 @@ def bootstrap_cluster(config, uri, token, deployConfig):
 
 
 def configure_plugin_server(config, uri, token):
-    ''' Configures the plugin server on the created RP4VMs cluster '''
+    """Configures the plugin server on the created RP4VMs cluster"""
     print("-> Configuring Plugin Server")
     pluginServerPort = 443
     handle_array_certificate(config["pluginServerIP"], uri, token, pluginServerPort)
@@ -584,7 +627,7 @@ def configure_plugin_server(config, uri, token):
 
 
 def check_connectivity(ipAddress):
-    ''' Generic call to check connectivity to a given IP address '''
+    """Generic call to check connectivity to a given IP address"""
     ack = False
     timeout = 600
     interval = 5
@@ -606,7 +649,7 @@ def check_connectivity(ipAddress):
 
 
 def add_gateway(config, uri, token):
-    ''' Configures additional gateway for current cluster '''
+    """Configures additional gateway for current cluster"""
     print("-> Configuring additional gateway")
     gwUri = f"{uri}/clusters/current/gateways"
     queryParams = {"timeout": "30", "isForce": "true"}
@@ -627,7 +670,7 @@ def add_gateway(config, uri, token):
 
 
 def connect_clusters(config, uri, token):
-    ''' Executes the connect cluster process including pre-checks '''
+    """Executes the connect cluster process including pre-checks"""
     print("-> Running connectivity checks to peer cluster")
     validateUri = f"{uri}/clusters/current/links/ip/validations"
     if config["vRPAWANIPs"]:
