@@ -1,0 +1,53 @@
+{
+"VmsToProtect": 
+    [{
+        "pluginServerIpOrFqdn": "10.0.0.10",
+        "_comment": "use either credentialsFile or vcUser and vcPass",
+        "credentialsFile": "C:\\10_creds",
+        "rpvmCluster": "Boston",
+        "vmName": "vm1",
+        "_comment2": "cgName is optional",
+        "_comment3": "Existing CG would be used if the provided CG exists",
+        "cgName": "cg_vm1",
+        "prodJournalCapGB": "5",
+        "replicaJournalCapGB": "20",
+        "rpoSec": "15",
+        "failoverNetworkByVnic": "network1, network2"
+    },
+    {
+        "pluginServerIpOrFqdn": "10.100.0.10",
+        "_comment": "use either credentialsFile or vcUser and vcPass",
+        "vcUser": "idan@idantestdomain.local",
+        "vcPassB64": "SWRhblBhc3N3b3JkRG9Ob3RVc2UxMjMh",
+        "rpvmCluster": "Jerusalem",
+        "vmName": "vm2",
+        "_comment2": "cgName is optional",
+        "_comment3": "Existing CG would be used if the provided CG exists",
+        "cgName": "cg_vm1",
+        "prodJournalCapGB": "20",
+        "replicaJournalCapGB": "20",
+        "rpoSec": "25",
+        "failoverNetworkByVnic": "network1, network2"
+    },
+    {
+        "pluginServerIpOrFqdn": "10.100.0.10",
+        "_comment": "use either credentialsFile or vcUser and vcPass",
+        "vcUser": "idan@idantestdomain.local",
+        "vcPassB64": "SWRhblBhc3N3b3JkRG9Ob3RVc2UxMjMh",
+        "rpvmCluster": "London",
+        "vmName": "vm5",
+        "_comment2": "cgName is optional",
+        "_comment3": "Existing CG would be used if the provided CG exists",
+        "cgName": "cg_vm3",
+        "prodJournalCapGB": "10",
+        "replicaJournalCapGB": "50",
+        "rpoSec": "10",
+        "failoverNetworkByVnic": "network1, network2"
+    }
+
+
+
+
+
+]
+}
